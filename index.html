@@ -2,244 +2,189 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>DersPlan Pro</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+        :root { --p: #1d4ed8; --bg: #f8fafc; --b: #e2e8f0; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { background: var(--bg); font-family: 'Inter', sans-serif; margin: 0; padding-top: 100px; color: #020617; }
         
-        :root {
-            --primary: #1d4ed8;
-            --bg: #f8fafc;
-            --text-main: #020617;
-            --text-sub: #334155;
-            --border: #e2e8f0;
-            --sat: env(safe-area-inset-top, 0px);
-        }
+        .header { position: fixed; top: 0; left: 0; right: 0; background: white; z-index: 100; border-bottom: 1px solid var(--b); }
+        .brand { height: 40px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; }
+        .nav { display: flex; padding: 5px 10px; gap: 8px; }
+        .nav-btn { flex: 1; height: 35px; border-radius: 8px; border: 1px solid var(--b); background: white; font-size: 12px; font-weight: 800; color: #64748b; cursor: pointer; }
+        .nav-btn.active { background: var(--p); color: white; border-color: var(--p); }
 
-        * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; touch-action: manipulation; }
-        
-        body {
-            background-color: var(--bg); font-family: 'Inter', sans-serif; margin: 0; color: var(--text-main);
-            padding-top: calc(105px + var(--sat)); padding-bottom: 20px;
-            overflow-x: hidden;
-        }
-
-        .header-container {
-            position: fixed; top: 0; left: 0; right: 0;
-            background: rgba(255, 255, 255, 0.98); z-index: 1000;
-            border-bottom: 1px solid var(--border); padding-top: var(--sat);
-            backdrop-filter: blur(15px);
-        }
-
-        .top-brand { height: 35px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; }
-        .top-brand span { color: var(--primary); margin-left: 2px; }
-
-        .top-nav { display: flex; height: 45px; padding: 0 10px; gap: 8px; align-items: center; }
-        .nav-item {
-            flex: 1; display: flex; align-items: center; justify-content: center;
-            height: 35px; border-radius: 8px; color: #64748b; cursor: pointer;
-            font-size: 12px; font-weight: 800; border: 1px solid transparent;
-        }
-        .nav-item.active { background: var(--primary); color: white; }
-
-        main { padding: 8px; width: 100%; max-width: 500px; margin: 0 auto; }
+        main { padding: 10px; max-width: 500px; margin: 0 auto; }
         .hidden { display: none !important; }
 
-        .day-bar { 
-            display: flex; gap: 6px; overflow-x: auto; padding: 5px 10px 10px 10px; 
-            scrollbar-width: none; -webkit-overflow-scrolling: touch;
-            scroll-snap-type: x mandatory;
-        }
+        .day-bar { display: flex; gap: 6px; overflow-x: auto; padding: 5px 0 10px; scrollbar-width: none; }
         .day-bar::-webkit-scrollbar { display: none; }
-        
-        .day-tab {
-            padding: 8px 14px; border-radius: 10px; background: white; border: 1px solid var(--border);
-            font-size: 13px; font-weight: 700; white-space: nowrap; color: var(--text-sub);
-            scroll-snap-align: center;
-        }
-        .day-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .day-tab { padding: 8px 15px; border-radius: 10px; background: white; border: 1px solid var(--b); font-size: 13px; font-weight: 700; white-space: nowrap; flex-shrink: 0; }
+        .day-tab.active { background: var(--p); color: white; }
 
-        .card { background: white; border-radius: 12px; padding: 10px; margin-bottom: 6px; border: 1px solid var(--border); }
-        .lesson-row { display: flex; align-items: center; gap: 8px; }
-        .item-idx { color: var(--primary); width: 20px; font-size: 16px; font-weight: 900; }
-        .item-time { color: var(--text-sub); width: 85px; font-size: 13px; font-weight: 700; }
-        .item-class { 
-            color: var(--primary); background: #eff6ff; 
-            padding: 3px 5px; border-radius: 6px; min-width: 50px; 
-            text-align: center; font-size: 11px; font-weight: 800; 
-        }
-        .item-title { flex: 1; font-size: 15px; font-weight: 700; text-transform: uppercase; }
+        .card { background: white; border-radius: 12px; padding: 10px; margin-bottom: 8px; border: 1px solid var(--b); }
+        .row { display: flex; align-items: center; gap: 8px; }
+        .idx { color: var(--p); width: 20px; font-weight: 800; }
+        .time { color: #64748b; width: 85px; font-size: 13px; font-weight: 600; }
+        .cls { background: #eff6ff; color: var(--p); padding: 3px 6px; border-radius: 6px; font-size: 11px; font-weight: 800; min-width: 45px; text-align: center; }
+        .ttl { flex: 1; font-weight: 700; font-size: 15px; text-transform: uppercase; }
 
-        /* KÜÇÜLTÜLMÜŞ SEÇİM ALANLARI */
-        .grid-compact { display: grid; grid-template-columns: 70px 60px 1fr; gap: 6px; }
-        input, select { 
-            height: 34px; font-size: 13px; border-radius: 8px; 
-            border: 1px solid var(--border); padding: 0 6px; width: 100%; font-weight: 600;
-        }
-        label { font-size: 10px; font-weight: 800; color: #64748b; margin-bottom: 3px; display: block; }
+        .grid-compact { display: grid; grid-template-columns: 70px 65px 1fr; gap: 5px; margin-top: 5px; }
+        select, input { height: 34px; border-radius: 8px; border: 1px solid var(--b); padding: 0 5px; font-size: 13px; font-weight: 600; width: 100%; }
+        label { font-size: 10px; font-weight: 800; color: #64748b; display: block; margin-bottom: 2px; }
 
-        .btn-action {
-            width: 100%; padding: 12px; border-radius: 10px; border: none;
-            background: var(--primary); color: white; font-weight: 800; font-size: 15px; margin-top: 10px;
-        }
-
-        .lock-box {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 8px 12px; border-radius: 10px; margin-bottom: 8px; border: 1px solid #fecaca; background: #fff5f5;
-        }
+        .btn-save { width: 100%; padding: 12px; border-radius: 10px; border: none; background: var(--p); color: white; font-weight: 800; margin-top: 10px; }
+        .lock-box { display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #fff5f5; border: 1px solid #fecaca; border-radius: 10px; margin-bottom: 10px; }
     </style>
 </head>
 <body>
-    <div class="header-container">
-        <div class="top-brand">DERS<span>PLAN</span></div>
-        <nav class="top-nav">
-            <div class="nav-item active" id="btnHome" onclick="setPage('home')">PROGRAM</div>
-            <div class="nav-item" id="btnSettings" onclick="setPage('settings')">AYARLAR</div>
-        </nav>
+
+    <div class="header">
+        <div class="brand">DERS<span>PLAN</span></div>
+        <div class="nav">
+            <button class="nav-btn active" id="btnH" onclick="tab('home')">PROGRAM</button>
+            <button class="nav-btn" id="btnS" onclick="tab('settings')">AYARLAR</button>
+        </div>
     </div>
 
-    <main id="pageHome">
-        <div class="day-bar" id="dayBar"></div>
-        <div id="scheduleList"></div>
+    <main id="pH">
+        <div class="day-bar" id="dBar"></div>
+        <div id="list"></div>
     </main>
 
-    <main id="pageSettings" class="hidden">
-        <div class="lock-box" id="lockBox">
-            <div style="font-size:11px; font-weight:800; color:#991b1b;">DÜZENLEME KİLİDİ</div>
-            <button onclick="handleLock()" id="lockToggle" style="padding:5px 10px; border-radius:6px; background:#f43f5e; color:white; border:none; font-weight:800; font-size:10px;">KİLİDİ AÇ</button>
+    <main id="pS" class="hidden">
+        <div class="lock-box" id="lBox">
+            <span style="font-size:12px; font-weight:800; color:#991b1b">DÜZENLEME KİLİDİ</span>
+            <button onclick="toggleLock()" id="lBtn" style="padding:5px 10px; border-radius:6px; background:#f43f5e; color:white; border:none; font-weight:800; font-size:10px">KİLİDİ AÇ</button>
         </div>
-
         <div class="card">
-            <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:5px;">
-                <div><label>Başla</label><input type="time" id="cfgStart" disabled></div>
-                <div><label>Ders</label><input type="number" id="cfgDur" disabled></div>
-                <div><label>Tenf.</label><input type="number" id="cfgBreak" disabled></div>
-                <div><label>Öğle</label><input type="number" id="cfgLunch" disabled></div>
+            <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:5px">
+                <div><label>Başla</label><input type="time" id="cSt" disabled></div>
+                <div><label>Ders</label><input type="number" id="cDu" disabled></div>
+                <div><label>Tenf</label><input type="number" id="cBr" disabled></div>
+                <div><label>Öğle</label><input type="number" id="cLu" disabled></div>
             </div>
         </div>
-
         <div class="card">
-            <label>GÜN SEÇİN</label>
-            <select id="bulkDay" disabled onchange="renderBulkRows()"></select>
+            <label>GÜN SEÇ</label>
+            <select id="bDay" disabled onchange="renderSets()"></select>
         </div>
-
-        <div id="bulkRows"></div>
-        <button class="btn-action" id="btnSave" disabled onclick="saveAll()">Kaydet ve Uygula</button>
+        <div id="sList"></div>
+        <button class="btn-save" id="sBtn" disabled onclick="save()">Kaydet ve Uygula</button>
     </main>
 
     <script>
-        const gunList = ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"];
-        const subeler = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"];
-        
-        let db = JSON.parse(localStorage.getItem('dersPlan_v1')) || {
-            schedule: [],
-            config: { start: "08:15", duration: 40, break: 10, lunch: 45 }
-        };
+        const days = ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"];
+        const subs = ["A","B","C","D","E","F","G","H","I","J","K","L"];
+        let db = JSON.parse(localStorage.getItem('dPlan')) || { s: [], c: { st: "08:15", du: 40, br: 10, lu: 45 } };
+        let curD = days[0], locked = true;
 
-        let currentActiveDay = gunList[0];
-        let isEditingUnlocked = false;
+        function tab(p) {
+            document.getElementById('pH').classList.toggle('hidden', p !== 'home');
+            document.getElementById('pS').classList.toggle('hidden', p !== 'settings');
+            document.getElementById('btnH').classList.toggle('active', p === 'home');
+            document.getElementById('btnS').classList.toggle('active', p === 'settings');
+            p === 'home' ? renderHome() : renderSets();
+        }
 
-        function getTimes() {
-            let res = []; let time = db.config.start;
-            for(let i=0; i<8; i++) {
-                res.push(time);
-                let [h, m] = time.split(':').map(Number);
-                let d = new Date(); d.setHours(h, m + parseInt(db.config.duration));
-                let gap = (i === 4) ? parseInt(db.config.lunch) : parseInt(db.config.break);
-                d.setMinutes(d.getMinutes() + gap);
-                time = String(d.getHours()).padStart(2, '0') + ":" + String(d.getMinutes()).padStart(2, '0');
+        function toggleLock() {
+            locked = !locked;
+            document.getElementById('lBtn').innerText = locked ? "KİLİDİ AÇ" : "KİLİTLE";
+            document.getElementById('lBox').style.background = locked ? "#fff5f5" : "#f0fdf4";
+            document.querySelectorAll('#pS input, #pS select, #sBtn').forEach(e => e.disabled = locked);
+        }
+
+        function getT() {
+            let r = [], t = db.c.st;
+            for(let i=1; i<=8; i++) {
+                r.push(t);
+                let [h, m] = t.split(':').map(Number);
+                let d = new Date(); d.setHours(h, m + parseInt(db.c.du) + (i===4?parseInt(db.c.lu):parseInt(db.c.br)));
+                t = String(d.getHours()).padStart(2,'0')+":"+String(d.getMinutes()).padStart(2,'0');
             }
-            return res;
-        }
-
-        function setPage(p) {
-            document.getElementById('pageHome').classList.toggle('hidden', p !== 'home');
-            document.getElementById('pageSettings').classList.toggle('hidden', p !== 'settings');
-            document.getElementById('btnHome').classList.toggle('active', p === 'home');
-            document.getElementById('btnSettings').classList.toggle('active', p === 'settings');
-            if(p === 'home') renderHome();
-            if(p === 'settings') renderBulkRows();
-        }
-
-        function handleLock() {
-            isEditingUnlocked = !isEditingUnlocked;
-            document.getElementById('lockToggle').innerText = isEditingUnlocked ? "KİLİTLE" : "KİLİDİ AÇ";
-            document.getElementById('lockBox').style.background = isEditingUnlocked ? "#f0fdf4" : "#fff5f5";
-            document.querySelectorAll('#pageSettings input, #pageSettings select, #btnSave').forEach(el => el.disabled = !isEditingUnlocked);
+            return r;
         }
 
         function renderHome() {
-            const list = document.getElementById('scheduleList');
-            const dayData = db.schedule.filter(s => s.day === currentActiveDay).sort((a,b) => a.idx - b.idx);
-            const times = getTimes();
-            let html = "";
-            if(dayData.length === 0) {
-                html = `<div class="card" style="text-align:center; padding:30px; color:#94a3b8;">Ders girişi yok.</div>`;
-            } else {
-                dayData.forEach(s => {
-                    html += `<div class="card" style="${s.isEmpty ? 'opacity:0.4' : ''}">
-                        <div class="lesson-row">
-                            <div class="item-idx">${s.idx}</div>
-                            <div class="item-time">${times[s.idx-1]}</div>
-                            <div class="item-class">${s.isEmpty ? '-' : s.class}</div>
-                            <div class="item-title">${s.lesson}</div>
-                        </div>
-                    </div>`;
-                });
-            }
-            list.innerHTML = html;
+            const container = document.getElementById('list');
+            const data = db.s.filter(x => x.d === curD).sort((a,b) => a.i - b.i);
+            const times = getT();
+            container.innerHTML = data.length ? data.map(x => `
+                <div class="card" style="${x.e ? 'opacity:0.4' : ''}">
+                    <div class="row">
+                        <div class="idx">${x.i}</div>
+                        <div class="time">${times[x.i-1]}</div>
+                        <div class="cls">${x.e ? '-' : x.c}</div>
+                        <div class="ttl">${x.l}</div>
+                    </div>
+                </div>`).join('') : '<div class="card" style="text-align:center;color:#94a3b8">Ders eklenmemiş.</div>';
         }
 
-        function renderBulkRows() {
-            const container = document.getElementById('bulkRows');
-            const day = document.getElementById('bulkDay').value;
-            let html = "";
+        function renderSets() {
+            const container = document.getElementById('sList');
+            const day = document.getElementById('bDay').value;
+            let h = "";
             for(let i=1; i<=8; i++) {
-                const s = db.schedule.find(x => x.day === day && x.idx === i) || {};
-                const currentLvl = s.class ? s.class.split('-')[0] : "";
-                const currentSub = s.class ? s.class.split('-')[1] : "";
-                
-                html += `<div class="card">
-                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-                        <input type="checkbox" id="chk-${i}" ${s.isEmpty ? 'checked' : ''} onchange="toggleFormRow(${i})" ${!isEditingUnlocked ? 'disabled' : ''}>
-                        <label for="chk-${i}" style="margin:0">Boş Ders</label>
+                const x = db.s.find(z => z.d === day && z.i === i) || {};
+                h += `<div class="card">
+                    <div class="row" style="margin-bottom:5px">
+                        <input type="checkbox" id="e-${i}" ${x.e?'checked':''} onchange="this.parentElement.nextElementSibling.style.opacity=this.checked?0.3:1" ${locked?'disabled':''}>
+                        <label for="e-${i}" style="margin:0">Boş Ders</label>
                     </div>
-                    <div id="row-ui-${i}" class="grid-compact" style="${s.isEmpty ? 'opacity:0.3; pointer-events:none' : ''}">
-                        <select id="lvl-${i}" ${!isEditingUnlocked ? 'disabled' : ''}>
-                            <option value="">Sınıf</option>
-                            <option value="9" ${currentLvl=="9"?'selected':''}>9</option>
-                            <option value="10" ${currentLvl=="10"?'selected':''}>10</option>
-                            <option value="11" ${currentLvl=="11"?'selected':''}>11</option>
-                            <option value="12" ${currentLvl=="12"?'selected':''}>12</option>
+                    <div class="grid-compact" style="${x.e?'opacity:0.3':''}">
+                        <select id="v-${i}" ${locked?'disabled':''}>
+                            <option value="">Sınıf</option>${[9,10,11,12].map(n=>`<option value="${n}" ${x.c?.split('-')[0]==n?'selected':''}>${n}</option>`).join('')}
                         </select>
-                        <select id="sub-${i}" ${!isEditingUnlocked ? 'disabled' : ''}>
-                            <option value="">Şube</option>
-                            ${subeler.map(sb => `<option value="${sb}" ${currentSub==sb?'selected':''}>${sb}</option>`).join('')}
+                        <select id="u-${i}" ${locked?'disabled':''}>
+                            <option value="">Şube</option>${subs.map(s=>`<option value="${s}" ${x.c?.split('-')[1]==s?'selected':''}>${s}</option>`).join('')}
                         </select>
-                        <input id="les-${i}" placeholder="Ders Adı" value="${s.lesson || ''}" ${!isEditingUnlocked ? 'disabled' : ''}>
+                        <input id="l-${i}" placeholder="Ders Adı" value="${x.l||''}" ${locked?'disabled':''}>
                     </div>
                 </div>`;
             }
-            container.innerHTML = html;
+            container.innerHTML = h;
         }
 
-        function toggleFormRow(i) {
-            const chk = document.getElementById(`chk-${i}`).checked;
-            document.getElementById(`row-ui-${i}`).style.opacity = chk ? "0.3" : "1";
-            document.getElementById(`row-ui-${i}`).style.pointerEvents = chk ? "none" : "auto";
-        }
-
-        function saveAll() {
-            db.config.start = document.getElementById('cfgStart').value;
-            db.config.duration = document.getElementById('cfgDur').value;
-            db.config.break = document.getElementById('cfgBreak').value;
-            db.config.lunch = document.getElementById('cfgLunch').value;
-            const day = document.getElementById('bulkDay').value;
-            let temp = db.schedule.filter(x => x.day !== day);
+        function save() {
+            db.c = { st: document.getElementById('cSt').value, du: document.getElementById('cDu').value, br: document.getElementById('cBr').value, lu: document.getElementById('cLu').value };
+            const day = document.getElementById('bDay').value;
+            db.s = db.s.filter(x => x.d !== day);
             for(let i=1; i<=8; i++) {
-                const empty = document.getElementById(`chk-${i}`).checked;
-                const lesson = document.getElementById(`les-${i}`).value;
-                const level = document.getElementById(`lvl-${i}`).value;
-                const sube = document.getElementById(`sub-${i}`).value;
-                if(empty) temp.push({day, idx: i, lesson: "BOŞ DERS", class: "-", isEmpty: true});
-                else if(lesson) temp.push({day, idx: i, lesson: lesson, class
+                const e = document.getElementById(`e-${i}`).checked;
+                const l = document.getElementById(`l-${i}`).value;
+                const v = document.getElementById(`v-${i}`).value;
+                const u = document.getElementById(`u-${i}`).value;
+                if(e) db.s.push({d:day, i, l:"BOŞ DERS", c:"-", e:true});
+                else if(l) db.s.push({d:day, i, l, c:v+(u?'-'+u:''), e:false});
+            }
+            localStorage.setItem('dPlan', JSON.stringify(db));
+            tab('home');
+        }
+
+        window.onload = () => {
+            const bar = document.getElementById('dBar');
+            const sel = document.getElementById('bDay');
+            days.forEach(d => {
+                const t = document.createElement('div');
+                t.className = "day-tab" + (d===curD?" active":"");
+                t.innerText = d;
+                t.onclick = (e) => {
+                    curD = d;
+                    document.querySelectorAll('.day-tab').forEach(x => x.classList.toggle('active', x.innerText===d));
+                    renderHome();
+                    e.target.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+                };
+                bar.appendChild(t);
+                sel.innerHTML += `<option>${d}</option>`;
+            });
+            document.getElementById('cSt').value = db.c.st;
+            document.getElementById('cDu').value = db.c.du;
+            document.getElementById('cBr').value = db.c.br;
+            document.getElementById('cLu').value = db.c.lu;
+            renderHome();
+        };
+    </script>
+</body>
+</html>
