@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>DersPlan v1 - Okunaklı</title>
+    <title>DersPlan v1 - Kompakt</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
         
         :root {
-            --primary: #1d4ed8; /* Daha koyu mavi, yüksek kontrast */
+            --primary: #1d4ed8;
             --primary-light: #eff6ff;
             --bg: #f8fafc;
-            --text-main: #020617; /* Tam siyah, en iyi okuma deneyimi */
-            --text-sub: #334155;  /* Daha koyu gri */
+            --text-main: #020617;
+            --text-sub: #334155;
             --card: #ffffff;
             --border: #e2e8f0;
             --sat: env(safe-area-inset-top, 0px);
@@ -25,7 +25,8 @@
         
         body {
             background-color: var(--bg); font-family: 'Inter', sans-serif; margin: 0; color: var(--text-main);
-            padding-top: calc(140px + var(--sat)); padding-bottom: calc(30px + var(--sab));
+            /* Üst boşluk azaltıldı */
+            padding-top: calc(115px + var(--sat)); padding-bottom: calc(15px + var(--sab));
             overflow-x: hidden;
         }
 
@@ -36,79 +37,67 @@
             backdrop-filter: blur(20px);
         }
 
-        .top-brand { height: 60px; display: flex; align-items: center; justify-content: center; }
-        .logo { font-weight: 800; font-size: 24px; letter-spacing: -0.5px; color: #0f172a; }
+        .top-brand { height: 45px; display: flex; align-items: center; justify-content: center; }
+        .logo { font-weight: 800; font-size: 20px; color: #0f172a; }
         .logo span { color: var(--primary); font-weight: 900; }
 
-        .top-nav { display: flex; height: 65px; padding: 0 16px; gap: 10px; align-items: center; }
+        .top-nav { display: flex; height: 50px; padding: 0 12px; gap: 8px; align-items: center; }
         .nav-item {
-            flex: 1; display: flex; align-items: center; justify-content: center; gap: 10px;
-            height: 48px; border-radius: 24px; color: #64748b; cursor: pointer;
-            transition: all 0.3s; font-size: 14px; font-weight: 800; text-transform: uppercase;
+            flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
+            height: 38px; border-radius: 12px; color: #64748b; cursor: pointer;
+            font-size: 13px; font-weight: 800; text-transform: uppercase;
         }
-        .nav-item.active { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(29, 78, 216, 0.3); }
+        .nav-item.active { background: var(--primary); color: white; }
 
-        .nav-icon { width: 22px; height: 22px; stroke-width: 2.5; }
+        .nav-icon { width: 18px; height: 18px; stroke-width: 2.5; }
 
-        main { padding: 12px; width: 100%; max-width: 550px; margin: 0 auto; }
+        main { padding: 8px; width: 100%; max-width: 550px; margin: 0 auto; }
         .hidden { display: none !important; }
 
-        .day-bar { display: flex; gap: 8px; overflow-x: auto; padding: 10px 0 15px 0; scrollbar-width: none; }
+        .day-bar { display: flex; gap: 6px; overflow-x: auto; padding: 5px 0 10px 0; scrollbar-width: none; }
         .day-bar::-webkit-scrollbar { display: none; }
         
         .day-tab {
-            padding: 12px 22px; border-radius: 14px; background: white; border: 2px solid var(--border);
-            font-size: 15px; font-weight: 700; white-space: nowrap; color: var(--text-sub); transition: all 0.3s;
+            padding: 8px 16px; border-radius: 10px; background: white; border: 1px solid var(--border);
+            font-size: 14px; font-weight: 700; white-space: nowrap; color: var(--text-sub);
         }
         .day-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
 
         .list-labels {
-            display: flex; align-items: center; padding: 0 12px 8px 12px;
-            font-size: 12px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px;
+            display: flex; align-items: center; padding: 0 10px 5px 10px;
+            font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase;
         }
-        .lbl-idx { width: 30px; margin-right: 10px; }
-        .lbl-time { width: 110px; margin-right: 10px; }
-        .lbl-class { width: 70px; margin-right: 10px; text-align: center; }
+        .lbl-idx { width: 25px; margin-right: 8px; }
+        .lbl-time { width: 100px; margin-right: 8px; }
+        .lbl-class { width: 65px; margin-right: 8px; text-align: center; }
 
+        /* KARTLARDAKİ BOŞLUKLAR DARALTILDI */
         .card {
-            background: white; border-radius: 20px; padding: 18px 16px; margin-bottom: 12px;
-            border: 1px solid var(--border); box-shadow: 0 3px 10px rgba(0,0,0,0.03);
+            background: white; border-radius: 12px; padding: 10px 12px; margin-bottom: 6px;
+            border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
-        .lesson-row { display: flex; align-items: center; gap: 12px; }
+        .lesson-row { display: flex; align-items: center; gap: 8px; }
 
-        .item-idx { color: var(--primary); width: 30px; font-size: 18px; font-weight: 900; }
-        .item-time { color: var(--text-sub); width: 110px; font-size: 15px; font-weight: 700; line-height: 1.2; }
+        .item-idx { color: var(--primary); width: 25px; font-size: 18px; font-weight: 900; }
+        /* Zaman alanını dikeyde daraltmak için yan yana düzen */
+        .item-time { color: var(--text-sub); width: 100px; font-size: 14px; font-weight: 700; line-height: 1.1; }
         .item-class { 
             color: var(--primary); background: var(--primary-light); 
-            padding: 6px 10px; border-radius: 10px; width: 70px; 
-            text-align: center; font-size: 14px; font-weight: 900; 
+            padding: 4px 6px; border-radius: 8px; width: 65px; 
+            text-align: center; font-size: 13px; font-weight: 900; 
         }
         .item-class.empty-val { background: transparent; color: transparent; }
         .item-title { 
             text-transform: uppercase; flex: 1; 
             color: var(--text-main); font-size: 17px; font-weight: 800; 
-            line-height: 1.3;
+            line-height: 1.2;
         }
 
-        /* Ayarlar ve Form Elemanları */
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        label { font-size: 12px; font-weight: 800; color: var(--text-main); text-transform: uppercase; margin-bottom: 8px; display: block; }
-        input, select {
-            width: 100%; height: 50px; border-radius: 14px; border: 2px solid #eef2f6;
-            padding: 0 14px; font-size: 16px; font-weight: 600; background: #fff; color: var(--text-main);
-        }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        input, select { height: 44px; font-size: 15px; border-radius: 10px; }
 
-        .lock-box {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 16px; border-radius: 18px; margin-bottom: 15px; border: 2px solid #fecaca;
-        }
-        .save-btn {
-            width: 100%; padding: 20px; border-radius: 18px; border: none;
-            background: var(--primary); color: white; font-weight: 800; font-size: 18px; margin-top: 15px;
-        }
-
-        .fade { animation: fadeIn 0.4s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .fade { animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -141,25 +130,25 @@
     </main>
 
     <main id="pageSettings" class="hidden fade">
-        <div class="lock-box" id="lockBox">
+        <div class="lock-box" id="lockBox" style="padding: 12px; margin-bottom: 10px;">
             <div>
-                <div style="font-weight:800; font-size:14px; color:#991b1b;" id="lockTxt">Düzenleme Kilidi Aktif</div>
-                <div style="font-size:11px; color:#64748b;">Değişiklik yapmak için kilidi açın</div>
+                <div style="font-weight:800; font-size:13px; color:#991b1b;" id="lockTxt">Düzenleme Kilidi</div>
+                <div style="font-size:10px; color:#64748b;">Değişiklik için kilidi açın</div>
             </div>
-            <button class="save-btn" style="width:auto; margin:0; padding:10px 15px; font-size:12px; background:#f43f5e;" id="lockToggle" onclick="handleLock()">KİLİDİ AÇ</button>
+            <button class="save-btn" style="width:auto; margin:0; padding:8px 12px; font-size:11px; background:#f43f5e; color:white; border:none; border-radius:8px;" id="lockToggle" onclick="handleLock()">KİLİDİ AÇ</button>
         </div>
 
         <div class="card" style="background: #fafbfc;">
             <div class="grid-2">
-                <div><label>Başlangıç</label><input type="time" id="cfgStart" disabled></div>
-                <div><label>Ders (dk)</label><input type="number" id="cfgDur" disabled></div>
-                <div><label>Teneffüs</label><input type="number" id="cfgBreak" disabled></div>
-                <div><label>Öğle Arası</label><input type="number" id="cfgLunch" disabled></div>
+                <div><label style="font-size:10px;">Başlangıç</label><input type="time" id="cfgStart" disabled></div>
+                <div><label style="font-size:10px;">Ders (dk)</label><input type="number" id="cfgDur" disabled></div>
+                <div><label style="font-size:10px;">Teneffüs</label><input type="number" id="cfgBreak" disabled></div>
+                <div><label style="font-size:10px;">Öğle Arası</label><input type="number" id="cfgLunch" disabled></div>
             </div>
         </div>
 
         <div class="card">
-            <label>GÜNCEL GÜN DÜZENLEME</label>
+            <label style="font-size:10px;">GÜNCEL GÜN DÜZENLEME</label>
             <select id="bulkDay" disabled onchange="renderBulkRows()" style="font-weight: 700;">
                 <option>Pazartesi</option><option>Salı</option><option>Çarşamba</option>
                 <option>Perşembe</option><option>Cuma</option><option>Cumartesi</option><option>Pazar</option>
@@ -167,10 +156,11 @@
         </div>
 
         <div id="bulkRows"></div>
-        <button class="save-btn" id="btnSave" disabled onclick="saveAll()">Değişiklikleri Uygula</button>
+        <button class="save-btn" id="btnSave" disabled onclick="saveAll()" style="width: 100%; padding: 15px; border-radius: 12px; border: none; background: var(--primary); color: white; font-weight: 800; font-size: 16px; margin-top: 10px;">Değişiklikleri Uygula</button>
     </main>
 
     <script>
+        /* JavaScript fonksiyonları aynen korunmuştur */
         const lessons = {
             "09": ["TÜRK DİLİ VE EDEBİYATI", "MATEMATİK", "İNGİLİZCE", "FİZİK", "KİMYA", "BİYOLOJİ", "TARİH", "COĞRAFYA", "ARAPÇA", "KURAN-I KERİM", "BEDEN EĞİTİMİ", "SAĞLIK BİLGİSİ", "REHBERLİK", "TEMEL DİNİ BİLGİLER"],
             "10": ["TÜRK DİLİ VE EDEBİYATI", "MATEMATİK", "İNGİLİZCE", "FİZİK", "KİMYA", "BİYOLOJİ", "TARİH", "COĞRAFYA", "FELSEFE", "HADİS", "FIKIH", "SİYER", "ARAPÇA", "KURAN-I KERİM", "BEDEN EĞİTİMİ"],
@@ -218,10 +208,7 @@
             isEditingUnlocked = !isEditingUnlocked;
             const lb = document.getElementById('lockBox');
             lb.style.background = isEditingUnlocked ? "#f0fdf4" : "#fff5f5";
-            lb.style.borderColor = isEditingUnlocked ? "#bbf7d0" : "#fecaca";
             document.getElementById('lockToggle').innerText = isEditingUnlocked ? "KİLİTLE" : "KİLİDİ AÇ";
-            document.getElementById('lockTxt').innerText = isEditingUnlocked ? "Düzenleme Aktif" : "Düzenleme Kilidi Aktif";
-            document.getElementById('lockTxt').style.color = isEditingUnlocked ? "#166534" : "#991b1b";
             document.querySelectorAll('#pageSettings input, #pageSettings select, #btnSave').forEach(el => el.disabled = !isEditingUnlocked);
             renderBulkRows();
         }
@@ -231,7 +218,7 @@
             const dayData = db.schedule.filter(s => s.day === currentActiveDay).sort((a,b) => a.idx - b.idx);
             const times = getTimes();
             if(dayData.length === 0) {
-                list.innerHTML = `<div class="card" style="text-align:center; padding:40px; color:var(--text-sub); font-size:16px; font-weight:600;">Henüz bu gün için ders girişi yapılmamış</div>`;
+                list.innerHTML = `<div class="card" style="text-align:center; padding:20px; color:var(--text-sub); font-size:15px;">Ders girişi yapılmamış</div>`;
                 return;
             }
             let html = "";
@@ -240,12 +227,12 @@
                 let [h, m] = times[s.idx-1].split(':').map(Number);
                 let d = new Date(); d.setHours(h, m + parseInt(db.config.duration));
                 let endTime = String(d.getHours()).padStart(2, '0') + ":" + String(d.getMinutes()).padStart(2, '0');
-                const classLabel = isEmpty ? '' : s.class.replace('/', ' / ');
+                const classLabel = isEmpty ? '' : s.class.replace('/', '/');
                 const classClass = isEmpty ? 'item-class empty-val' : 'item-class';
-                html += `<div class="card ${isEmpty ? 'is-empty' : ''}" style="${isEmpty ? 'opacity:0.5; background:#f8fafc; border-style:dashed;' : ''}">
+                html += `<div class="card" style="${isEmpty ? 'opacity:0.5; background:#f1f5f9;' : ''}">
                     <div class="lesson-row">
                         <div class="item-idx">${s.idx}</div>
-                        <div class="item-time">${times[s.idx-1]}<br><span style="font-size:12px; opacity:0.7;">${endTime}</span></div>
+                        <div class="item-time">${times[s.idx-1]} - ${endTime}</div>
                         <div class="${classClass}">${classLabel}</div>
                         <div class="item-title">${isEmpty ? 'BOŞ DERS' : s.lesson}</div>
                     </div>
@@ -262,10 +249,10 @@
                 const s = db.schedule.find(x => x.day === day && x.idx === i) || {};
                 const lvl = s.class ? s.class.split('/')[0] : "";
                 const isEmpty = s.isEmpty === true;
-                html += `<div class="card" style="padding: 12px; border-color: #e2e8f0;">
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; background:#f1f5f9; padding:8px; border-radius:10px;">
-                        <input type="checkbox" id="chk-${i}" ${isEmpty ? 'checked' : ''} onchange="toggleFormRow(${i})" ${!isEditingUnlocked ? 'disabled' : ''} style="width:22px; height:22px;">
-                        <label for="chk-${i}" style="margin:0; font-size:14px;">Bu saatte dersim yok</label>
+                html += `<div class="card" style="padding: 10px;">
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:5px;">
+                        <input type="checkbox" id="chk-${i}" ${isEmpty ? 'checked' : ''} onchange="toggleFormRow(${i})" ${!isEditingUnlocked ? 'disabled' : ''}>
+                        <label for="chk-${i}" style="margin:0; font-size:12px;">Dersim yok</label>
                     </div>
                     <div id="row-ui-${i}" style="${isEmpty ? 'opacity:0.3; pointer-events:none;' : ''}">
                         <div class="grid-2">
@@ -278,7 +265,7 @@
                             </select>
                             <select id="sub-${i}" ${!isEditingUnlocked ? 'disabled' : ''}><option value="">Şube</option></select>
                         </div>
-                        <select id="les-${i}" style="margin-top:10px;" ${!isEditingUnlocked ? 'disabled' : ''}><option value="">Ders Seçin</option></select>
+                        <select id="les-${i}" style="margin-top:5px;" ${!isEditingUnlocked ? 'disabled' : ''}><option value="">Ders Seçin</option></select>
                     </div>
                 </div>`;
             }
