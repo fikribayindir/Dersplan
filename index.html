@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>DersPlan v1 - Kompakt</title>
+    <title>DersPlan v1 - Ultra Kompakt</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
         :root {
@@ -22,7 +22,7 @@
         
         body { 
             background-color: var(--bg); font-family: 'Inter', sans-serif; margin: 0; color: var(--text);
-            padding-top: calc(110px + var(--sat)); padding-bottom: calc(20px + var(--sab));
+            padding-top: calc(105px + var(--sat)); padding-bottom: calc(20px + var(--sab));
             overflow-x: hidden;
         }
 
@@ -33,96 +33,72 @@
             backdrop-filter: blur(15px);
         }
 
-        .top-brand {
-            height: 50px; display: flex; align-items: center; justify-content: center;
-            border-bottom: 1px solid #f1f5f9;
-        }
-        .logo { font-weight: 900; font-size: 18px; font-style: italic; letter-spacing: -1px; }
+        .top-brand { height: 45px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #f1f5f9; }
+        .logo { font-weight: 900; font-size: 16px; font-style: italic; letter-spacing: -1px; }
         .logo span { color: var(--primary); }
 
-        .top-nav { display: flex; height: 50px; padding: 0 12px; gap: 8px; align-items: center; }
-
+        .top-nav { display: flex; height: 45px; padding: 0 12px; gap: 8px; align-items: center; }
         .nav-item {
             flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
-            height: 36px; border-radius: 10px; color: #94a3b8; cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;
+            height: 32px; border-radius: 8px; color: #94a3b8; cursor: pointer;
+            font-size: 10px; font-weight: 800; text-transform: uppercase;
         }
         .nav-item.active { background: #eff6ff; color: var(--primary); }
-        .nav-icon { width: 18px; height: 18px; stroke-width: 2.5; }
+        .nav-icon { width: 16px; height: 16px; stroke-width: 2.5; }
 
-        .nav-item.active .gear-icon { animation: rotate 3s linear infinite; }
-        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-        main { padding: 12px; width: 100%; max-width: 450px; margin: 0 auto; }
+        main { padding: 10px; width: 100%; max-width: 450px; margin: 0 auto; }
         .hidden { display: none !important; }
 
-        .day-bar { display: flex; gap: 6px; overflow-x: auto; padding: 2px 0 12px 0; scrollbar-width: none; }
+        .day-bar { display: flex; gap: 6px; overflow-x: auto; padding: 2px 0 10px 0; scrollbar-width: none; }
         .day-bar::-webkit-scrollbar { display: none; }
-        
         .day-tab { 
-            padding: 8px 14px; border-radius: 100px; background: white; border: 1.5px solid var(--border);
-            font-size: 11px; font-weight: 800; white-space: nowrap; color: #64748b; transition: all 0.2s;
+            padding: 6px 12px; border-radius: 100px; background: white; border: 1.5px solid var(--border);
+            font-size: 10px; font-weight: 800; white-space: nowrap; color: #64748b;
         }
-        .day-tab.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 3px 8px rgba(37, 99, 235, 0.2); }
+        .day-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
 
-        /* DARALTILMIŞ KART YAPISI */
+        /* ULTRA KOMPAKT KART TASARIMI */
         .card { 
-            background: white; border-radius: 16px; padding: 10px 12px; margin-bottom: 8px; 
-            border: 1.5px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            background: white; border-radius: 12px; padding: 6px 10px; margin-bottom: 6px; 
+            border: 1px solid var(--border);
         }
-        .lesson-row { display: flex; align-items: center; gap: 12px; border-left: 4px solid var(--primary); padding: 2px 8px; }
-        .card.is-empty { background: #fdfdfd; border-style: dashed; opacity: 0.7; }
-        .card.is-empty .lesson-row { border-left-color: #cbd5e1; }
+        .lesson-row { display: flex; align-items: center; gap: 10px; }
+        .card.is-empty { background: #fdfdfd; border-style: dashed; opacity: 0.6; }
 
-        .time-box { min-width: 60px; text-align: center; border-right: 1.5px solid #f1f5f9; padding-right: 10px; }
-        .time-box .clock { font-weight: 900; font-size: 15px; letter-spacing: -0.4px; color: #1e293b; }
-        .time-box .idx { font-size: 9px; color: var(--primary); font-weight: 800; margin-top: 1px; text-transform: uppercase; }
+        .time-box { 
+            min-width: 65px; text-align: left; border-right: 1.5px solid #f1f5f9; padding-right: 8px; 
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .time-box .idx { font-size: 9px; color: var(--primary); font-weight: 900; text-transform: uppercase; line-height: 1; }
+        .time-box .clock { font-weight: 800; font-size: 14px; letter-spacing: -0.3px; color: #1e293b; margin-top: 2px; }
         
-        .lesson-info { flex: 1; }
+        .lesson-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
         .lesson-info .class-tag { 
-            font-size: 9px; font-weight: 900; color: var(--primary); background: #eff6ff; 
-            padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 3px;
+            font-size: 9px; font-weight: 900; color: #64748b; 
+            margin-bottom: 1px; text-transform: uppercase;
         }
-        .lesson-info .title { font-weight: 700; font-size: 13px; text-transform: uppercase; line-height: 1.2; color: #334155; }
+        .lesson-info .title { font-weight: 700; font-size: 13px; text-transform: uppercase; color: #334155; line-height: 1.1; }
 
-        /* AYARLAR BÖLÜMÜ DÜZENLEME */
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        label { font-size: 10px; font-weight: 800; color: #64748b; text-transform: uppercase; margin-bottom: 4px; display: block; padding-left: 2px; }
-        
-        input, select { 
-            width: 100%; height: 44px; border-radius: 12px; border: 2px solid var(--border); 
-            padding: 0 12px; font-size: 14px; outline: none; background: white; color: var(--text); -webkit-appearance: none;
-        }
-        .lock-box { padding: 12px 16px; border-radius: 16px; margin-bottom: 16px; }
-        .save-btn { padding: 16px; border-radius: 16px; font-size: 14px; margin-top: 15px; }
+        /* AYARLAR */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        label { font-size: 9px; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin-bottom: 2px; }
+        input, select { width: 100%; height: 38px; border-radius: 10px; border: 1.5px solid var(--border); padding: 0 10px; font-size: 14px; }
+        .lock-box { padding: 10px; border-radius: 12px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
+        .save-btn { width: 100%; padding: 14px; border-radius: 12px; background: var(--primary); color: white; font-weight: 800; border: none; margin-top: 10px; }
 
-        .bulk-grid { display: grid; grid-template-columns: 60px 1fr 1fr; gap: 8px; align-items: center; }
-        .empty-check { padding: 8px 12px; border-radius: 10px; margin-bottom: 8px; }
-        .fade { animation: fadeIn 0.3s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .bulk-grid { display: grid; grid-template-columns: 50px 1fr 1fr; gap: 6px; align-items: center; }
+        .empty-check { padding: 6px 10px; border-radius: 8px; margin-bottom: 6px; border: 1px solid #fecaca; display: flex; align-items: center; gap: 8px; }
+        .fade { animation: fadeIn 0.2s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
-    <div class="header-container">
-        <header class="top-brand">
-            <div class="logo">DERS<span>PLAN</span></div>
-        </header>
 
+    <div class="header-container">
+        <header class="top-brand"><div class="logo">DERS<span>PLAN</span></div></header>
         <nav class="top-nav">
-            <div class="nav-item active" id="btnHome" onclick="setPage('home')">
-                <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-                <span>PROGRAM</span>
-            </div>
-            <div class="nav-item" id="btnSettings" onclick="setPage('settings')">
-                <svg class="nav-icon gear-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                </svg>
-                <span>AYARLAR</span>
-            </div>
+            <div class="nav-item active" id="btnHome" onclick="setPage('home')">PROGRAM</div>
+            <div class="nav-item" id="btnSettings" onclick="setPage('settings')">AYARLAR</div>
         </nav>
     </div>
 
@@ -132,27 +108,24 @@
     </main>
 
     <main id="pageSettings" class="hidden fade">
-        <div class="lock-box" id="lockBox">
+        <div class="lock-box" id="lockBox" style="background:#fff1f2; border:1px solid #fecaca;">
             <div>
-                <div style="font-weight:900; font-size:13px;" id="lockTxt">DÜZENLEME KİLİTLİ</div>
-                <div style="font-size:9px; color:#64748b; font-weight:700; text-transform:uppercase;">Değişiklik için kilidi açın</div>
+                <div style="font-weight:900; font-size:12px;" id="lockTxt">DÜZENLEME KİLİTLİ</div>
             </div>
-            <button class="lock-btn btn-lock" id="lockToggle" onclick="handleLock()">KİLİDİ AÇ</button>
+            <button onclick="handleLock()" id="lockToggle" style="padding:6px 12px; border-radius:8px; border:none; background:#ef4444; color:white; font-size:10px; font-weight:800;">AÇ</button>
         </div>
 
         <div class="card">
-            <h3 style="font-size:10px; font-weight:900; margin-bottom:12px; border-bottom:1px solid #f1f5f9; padding-bottom:8px; color:#94a3b8; text-transform:uppercase;">Zamanlama</h3>
             <div class="grid-2">
                 <div><label>Başlangıç</label><input type="time" id="cfgStart" disabled></div>
-                <div><label>Ders Süresi</label><input type="number" id="cfgDur" disabled></div>
-                <div><label>Teneffüs</label><input type="number" id="cfgBreak" disabled></div>
-                <div><label>Öğle Arası</label><input type="number" id="cfgLunch" disabled></div>
+                <div><label>Ders (dk)</label><input type="number" id="cfgDur" disabled></div>
+                <div><label>Ten. (dk)</label><input type="number" id="cfgBreak" disabled></div>
+                <div><label>Öğle (dk)</label><input type="number" id="cfgLunch" disabled></div>
             </div>
         </div>
 
-        <div class="card" style="background:#eff6ff; border-color:#dbeafe;">
-            <label style="color:var(--primary)">GÜN SEÇİMİ</label>
-            <select id="bulkDay" disabled onchange="renderBulkRows()" style="font-weight:800; color:var(--primary); border-color:#bfdbfe;">
+        <div class="card" style="background:#eff6ff;">
+            <select id="bulkDay" disabled onchange="renderBulkRows()" style="font-weight:800; color:var(--primary);">
                 <option>Pazartesi</option><option>Salı</option><option>Çarşamba</option>
                 <option>Perşembe</option><option>Cuma</option><option>Cumartesi</option><option>Pazar</option>
             </select>
@@ -162,19 +135,13 @@
     </main>
 
     <script>
-        // JS mantığı değişmedi, sadece render işlevleri HTML yapısıyla uyumlu kalacak
         const lessons = {
             "09": ["TÜRK DİLİ VE EDEBİYATI", "MATEMATİK", "İNGİLİZCE", "FİZİK", "KİMYA", "BİYOLOJİ", "TARİH", "COĞRAFYA", "ARAPÇA", "KURAN-I KERİM", "BEDEN EĞİTİMİ", "SAĞLIK BİLGİSİ", "REHBERLİK", "TEMEL DİNİ BİLGİLER"],
             "10": ["TÜRK DİLİ VE EDEBİYATI", "MATEMATİK", "İNGİLİZCE", "FİZİK", "KİMYA", "BİYOLOJİ", "TARİH", "COĞRAFYA", "FELSEFE", "HADİS", "FIKIH", "SİYER", "ARAPÇA", "KURAN-I KERİM", "BEDEN EĞİTİMİ"],
             "11": ["TÜRK DİLİ VE EDEBİYATI", "MATEMATİK", "İNGİLİZCE", "TARİH", "COĞRAFYA", "FELSEFE", "TEFSİR", "AKAİD", "HİTABET", "ARAPÇA", "KURAN-I KERİM", "SEÇMELİ DERS", "BEDEN EĞİTİMİ"],
             "12": ["TÜRK DİLİ VE EDEBİYATI", "MATEMATİK", "İNGİLİZCE", "T.C. İNKILAP TARİHİ", "COĞRAFYA", "DİNLER TARİHİ", "KELAM", "ARAPÇA", "İSLAM KÜLTÜR VE MEDENİYETİ", "KURAN-I KERİM", "REHBERLİK", "SEÇMELİ DERS"]
         };
-        const classSubs = { 
-            "09": ["A", "B", "C", "D", "E", "I", "J"], 
-            "10": ["A", "B", "C", "D", "I", "J"], 
-            "11": ["A", "B", "I", "J"], 
-            "12": ["A", "B", "C", "I", "J"] 
-        };
+        const classSubs = { "09": ["A", "B", "C", "D", "E", "I", "J"], "10": ["A", "B", "C", "D", "I", "J"], "11": ["A", "B", "I", "J"], "12": ["A", "B", "C", "I", "J"] };
         const gunList = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
 
         let db = JSON.parse(localStorage.getItem('dersPlan_v1')) || {
@@ -186,8 +153,7 @@
         let isEditingUnlocked = false;
 
         function getTimes() {
-            let res = [];
-            let time = db.config.start || "08:15";
+            let res = []; let time = db.config.start || "08:15";
             for(let i=0; i<8; i++) {
                 res.push(time);
                 let [h, m] = time.split(':').map(Number);
@@ -206,19 +172,15 @@
             document.getElementById('btnSettings').classList.toggle('active', p === 'settings');
             if(p === 'home') renderHome();
             if(p === 'settings') renderBulkRows();
-            window.scrollTo(0,0);
         }
 
         function handleLock() {
             isEditingUnlocked = !isEditingUnlocked;
-            const box = document.getElementById('lockBox');
             const btn = document.getElementById('lockToggle');
-            box.classList.toggle('unlocked', isEditingUnlocked);
-            btn.innerText = isEditingUnlocked ? "KİLİTLE" : "KİLİDİ AÇ";
-            btn.className = `lock-btn ${isEditingUnlocked ? 'btn-unlock' : 'btn-lock'}`;
+            btn.innerText = isEditingUnlocked ? "KİLİTLE" : "AÇ";
+            btn.style.background = isEditingUnlocked ? "#22c55e" : "#ef4444";
             document.getElementById('lockTxt').innerText = isEditingUnlocked ? "DÜZENLEME AÇIK" : "DÜZENLEME KİLİTLİ";
-            const controls = document.querySelectorAll('#pageSettings input, #pageSettings select, #btnSave');
-            controls.forEach(el => el.disabled = !isEditingUnlocked);
+            document.querySelectorAll('#pageSettings input, #pageSettings select, #btnSave').forEach(el => el.disabled = !isEditingUnlocked);
             renderBulkRows();
         }
 
@@ -227,7 +189,7 @@
             const dayData = db.schedule.filter(s => s.day === currentActiveDay).sort((a,b) => a.idx - b.idx);
             const times = getTimes();
             if(dayData.length === 0) {
-                list.innerHTML = `<div class="card" style="text-align:center; padding:40px 20px; color:#94a3b8; font-weight:800; border-style:dashed; opacity:0.6; font-size:12px;">PROGRAMDA KAYIT BULUNAMADI</div>`;
+                list.innerHTML = `<div class="card" style="text-align:center; padding:30px; color:#94a3b8; font-size:11px;">PROGRAM BOŞ</div>`;
                 return;
             }
             let html = "";
@@ -236,11 +198,11 @@
                 html += `<div class="card ${isEmpty ? 'is-empty' : ''}">
                     <div class="lesson-row">
                         <div class="time-box">
-                            <div class="clock">${times[s.idx-1]}</div>
                             <div class="idx">${s.idx}. DERS</div>
+                            <div class="clock">${times[s.idx-1]}</div>
                         </div>
                         <div class="lesson-info">
-                            <span class="class-tag">${isEmpty ? 'BOŞ' : s.class}</span>
+                            <span class="class-tag">${isEmpty ? 'MÜSAİT' : s.class}</span>
                             <div class="title">${isEmpty ? 'BOŞ DERS' : s.lesson}</div>
                         </div>
                     </div>
@@ -260,9 +222,9 @@
                 html += `<div class="card">
                     <div class="empty-check">
                         <input type="checkbox" id="chk-${i}" ${isEmpty ? 'checked' : ''} onchange="toggleFormRow(${i})" ${!isEditingUnlocked ? 'disabled' : ''}>
-                        <label for="chk-${i}">BOŞ SAAT</label>
+                        <label for="chk-${i}" style="color:#ef4444; margin:0;">BOŞ</label>
                     </div>
-                    <div id="row-ui-${i}" style="${isEmpty ? 'opacity:0.25; pointer-events:none; filter:grayscale(1)' : ''}; transition:all 0.3s;">
+                    <div id="row-ui-${i}" style="${isEmpty ? 'opacity:0.2; pointer-events:none;' : ''}">
                         <div class="bulk-grid">
                             <span style="font-size:9px; font-weight:900; color:var(--primary)">${i}. DERS</span>
                             <select id="lvl-${i}" onchange="updateFilters(${i})" ${!isEditingUnlocked ? 'disabled' : ''}>
@@ -274,7 +236,7 @@
                             </select>
                             <select id="sub-${i}" ${!isEditingUnlocked ? 'disabled' : ''}><option value="">Şube</option></select>
                         </div>
-                        <select id="les-${i}" style="margin-top:8px;" ${!isEditingUnlocked ? 'disabled' : ''}><option value="">Ders Seçin</option></select>
+                        <select id="les-${i}" style="margin-top:5px;" ${!isEditingUnlocked ? 'disabled' : ''}><option value="">Ders Seçin</option></select>
                     </div>
                 </div>`;
             }
@@ -292,9 +254,8 @@
         function toggleFormRow(i) {
             const isChecked = document.getElementById(`chk-${i}`).checked;
             const ui = document.getElementById(`row-ui-${i}`);
-            ui.style.opacity = isChecked ? "0.25" : "1";
+            ui.style.opacity = isChecked ? "0.2" : "1";
             ui.style.pointerEvents = isChecked ? "none" : "auto";
-            ui.style.filter = isChecked ? "grayscale(1)" : "none";
         }
 
         function updateFilters(i) {
@@ -352,4 +313,3 @@
     </script>
 </body>
 </html>
-
