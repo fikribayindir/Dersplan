@@ -13,6 +13,13 @@
       --line:rgba(255,255,255,0.10);
       --text:#ffffff;
       --muted:rgba(255,255,255,0.70);
+      --mutedText: rgba(255,255,255,0.55);
+      --headerText: rgba(255,255,255,0.70);
+      --timeText: rgba(255,255,255,0.60);
+      --topbar1: rgba(6,10,16,0.72);
+      --topbar2: rgba(6,10,16,0.30);
+      --topbar3: rgba(6,10,16,0.00);
+
       --radius:22px;
       --frame:3px;   /* turuncu şerit kalınlığı */
       --inset:10px;  /* ekran kenarından boşluk */
@@ -20,7 +27,27 @@
       --shadow: 0 10px 30px rgba(0,0,0,0.35);
     }
 
-    html, body{
+    
+
+/* ===== Tema (Tüm Uygulama) ===== */
+body.theme-day{
+  --bg:#e5eaf2;
+  --panel:#f4f7fb;
+  --frame:#f0f4f9;
+  --text:#0b1220;
+  --muted: rgba(11,18,32,0.68);
+  --line: rgba(11,18,32,0.14);
+  --shadow: 0 10px 26px rgba(2,6,23,0.14);
+  --mutedText: rgba(11,18,32,0.70);
+  --headerText: rgba(11,18,32,0.72);
+  --timeText: rgba(11,18,32,0.75);
+  --topbar1: rgba(222,226,235,0.96);
+  --topbar2: rgba(222,226,235,0.78);
+  --topbar3: rgba(222,226,235,0.00);
+}
+/* Gece modu: :root değerleri geçerli */
+
+html, body{
       height:100%;
       margin:0;
       background:#000;
@@ -73,7 +100,8 @@
     }
 
     .appTitle{
-      color:var(--text);
+      color:#fff;
+      /* Başlıkta DERS her modda beyaz kalsın */
       font-weight:900;
       letter-spacing:2px;
       text-align:center;
@@ -164,7 +192,7 @@
       display:grid;
       grid-template-columns: 26px 42px 1fr 70px 1.4fr;
       padding: 12px 12px 10px;
-      color: rgba(255,255,255,0.70);
+      color: var(--headerText);
       font-weight: 900;
       letter-spacing: 1px;
       border-bottom: 1px solid var(--line);
@@ -220,7 +248,7 @@
       text-align:center;
     }
     .time{
-      color: rgba(255,255,255,0.75);
+      color: var(--timeText);
       font-weight: 800;
       letter-spacing: 0.5px;
       font-size: 15px;
@@ -253,7 +281,7 @@
       color: rgba(255,255,255,0.85);
       font-weight: 700;
     }
-    .muted{ color: rgba(255,255,255,0.65); font-weight: 700; }
+    .muted{ color: var(--muted); font-weight: 700; }
 
     /* Modal (nokta tıkla / uzun bas) */
     .modalOverlay{
@@ -286,7 +314,7 @@
       margin-bottom: 10px;
     }
     .sheetTitle{
-      color:#fff;
+      color: var(--text);
       font-weight: 1000;
       letter-spacing: 1px;
       font-size: 16px;
@@ -306,7 +334,7 @@
     .btn{
       border: 1px solid rgba(255,255,255,0.14);
       background: rgba(255,255,255,0.06);
-      color:#fff;
+      color: var(--text);
       font-weight: 900;
       letter-spacing: 0.5px;
       border-radius: 14px;
@@ -327,7 +355,7 @@
       margin-top: 10px;
     }
     .label{
-      color: rgba(255,255,255,0.70);
+      color: var(--headerText);
       font-weight: 900;
       letter-spacing: 0.5px;
       font-size: 12px;
@@ -339,7 +367,7 @@
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,0.12);
       background: rgba(255,255,255,0.05);
-      color:#fff;
+      color: var(--text);
       padding: 12px;
       font-weight: 700;
       outline: none;
@@ -353,7 +381,7 @@
     }
 
     .hint{
-      color: rgba(255,255,255,0.60);
+      color: var(--timeText);
       font-weight: 700;
       font-size: 12px;
       line-height: 1.35;
@@ -374,7 +402,7 @@
       gap:8px;
       border:1px solid rgba(255,255,255,0.14);
       background: rgba(255,255,255,0.05);
-      color:#fff;
+      color: var(--text);
       font-weight: 1000;
       letter-spacing: 1px;
       border-radius: 14px;
@@ -411,7 +439,7 @@
       flex:0 0 auto;
       border:1px solid rgba(255,255,255,0.14);
       background: rgba(255,255,255,0.05);
-      color:#fff;
+      color: var(--text);
       font-weight: 1000;
       letter-spacing: 0.6px;
       border-radius: 999px;
@@ -431,10 +459,10 @@
       font-weight: 1000;
       letter-spacing: 0.4px;
       margin-bottom: 6px;
-      color:#fff;
+      color: var(--text);
     }
     .notesItemMeta{
-      color: rgba(255,255,255,0.70);
+      color: var(--headerText);
       font-weight: 800;
       font-size: 12px;
       line-height: 1.35;
@@ -542,10 +570,609 @@
       .tTime{ font-size: 11px; }
     }
 
+
+/* ===== Ayarlar Paneli (Overlay) ===== */
+.settingsBtn{
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.92);
+  font-size: 20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  z-index: 5000;
+  -webkit-tap-highlight-color: transparent;
+}
+.settingsBtn:active{ transform: scale(.98); }
+
+.settingsOverlay{
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 6000;
+}
+.settingsOverlay.open{ display:block; }
+
+.settingsBackdrop{
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.55);
+  cursor: pointer;
+}
+
+.settingsPanel{
+  position:absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: min(520px, calc(100vw - 22px));
+  max-height: min(82vh, 760px);
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(10,18,32,0.98);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.55);
+  display:flex;
+  flex-direction: column;
+}
+
+.settingsTop{
+  padding: 12px 12px;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.settingsTitle{
+  font-weight: 1100;
+  letter-spacing: .8px;
+  color: rgba(255,255,255,0.92);
+}
+.settingsClose{
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.92);
+  padding: 8px 12px;
+  font-weight: 1000;
+  cursor:pointer;
+}
+
+.settingsBody{
+  padding: 12px 12px 14px 12px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  color: rgba(255,255,255,0.92);
+}
+
+.settingsRow{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.settingsChip{
+  flex: 1 1 120px;
+  border-radius: 16px;
+  padding: 12px 12px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.92);
+  font-weight: 1000;
+  cursor: pointer;
+  text-align:center;
+}
+.modeToggle{
+  display:flex;
+  gap: 10px;
+}
+.modeToggle .settingsChip.active{
+  border-color: rgba(255,153,0,0.55);
+  background: rgba(255,153,0,0.18);
+}
+.settingsHint{
+  margin-top: 10px;
+  color: rgba(255,255,255,0.62);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+
+/* ===== Tema: Gündüz / Gece ===== */
+body.theme-day{
+  background: #f3f4f6 !important;
+  color: #111827 !important;
+}
+body.theme-day .settingsPanel{
+  background: rgba(255,255,255,0.98) !important;
+  border-color: rgba(17,24,39,0.10) !important;
+}
+body.theme-day .settingsTitle,
+body.theme-day .settingsBody{
+  color: rgba(17,24,39,0.92) !important;
+}
+body.theme-day .settingsHint{ color: rgba(17,24,39,0.60) !important; }
+body.theme-day .settingsClose{
+  background: rgba(17,24,39,0.05) !important;
+  border-color: rgba(17,24,39,0.12) !important;
+  color: rgba(17,24,39,0.92) !important;
+}
+body.theme-day .settingsChip{
+  background: rgba(17,24,39,0.04) !important;
+  border-color: rgba(17,24,39,0.10) !important;
+  color: rgba(17,24,39,0.92) !important;
+}
+body.theme-day .settingsChip.active{
+  border-color: rgba(255,153,0,0.70) !important;
+  background: rgba(255,153,0,0.18) !important;
+  color: rgba(17,24,39,0.95) !important;
+}
+
+/* Gece modu zaten varsayılan koyu tema; sadece isimlendirme için sınıf */
+body.theme-night{
+  background: #0b1220 !important;
+  color: rgba(255,255,255,0.92) !important;
+}
+
+
+/* ===== Tema butonları tıklama fix ===== */
+#settingsOverlay.open, #settingsOverlay.open * { pointer-events: auto; }
+
+
+body.theme-day .hint, body.theme-day .subhint, body.theme-day .infoText { color: rgba(11,18,32,0.70) !important; }
+body.theme-day .notesHelp, body.theme-day .help { color: rgba(11,18,32,0.72) !important; }
+body.theme-day .chip, body.theme-day .pill { background: rgba(255,255,255,0.45) !important; border-color: rgba(11,18,32,0.16) !important; }
+
+/* ===== Ayarlar: Günler ===== */
+.daysGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:10px}
+.dayToggle{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.06)}
+.dayToggle input{width:18px;height:18px;accent-color: var(--accent);}
+.dayToggle span{font-weight:800;letter-spacing:.2px}
+.settingsRow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px}
+.settingsRow label{font-weight:800;opacity:.9}
+.settingsRow select,.settingsRow input[type="number"]{flex:1;max-width:170px}
+
+
+/* ===== Sınıf / Ders Ekle UI ===== */
+.clRow{ display:flex; gap:10px; align-items:center; }
+.clInp{
+  flex: 1 1 auto;
+  min-width: 0;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.92);
+  padding: 12px 12px;
+  font-weight: 1000;
+  outline: none;
+}
+body.theme-day .clInp{
+  border-color: rgba(17,24,39,0.14);
+  background: rgba(17,24,39,0.04);
+  color: rgba(17,24,39,0.92);
+}
+.clBtn{
+  flex: 0 0 auto;
+  border-radius: 14px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255,153,0,0.55);
+  background: rgba(255,153,0,0.18);
+  color: rgba(255,255,255,0.95);
+  font-weight: 1100;
+  cursor: pointer;
+}
+body.theme-day .clBtn{ color: rgba(17,24,39,0.95); }
+
+.clList{
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.03);
+  overflow: hidden;
+}
+body.theme-day .clList{
+  border-color: rgba(17,24,39,0.10);
+  background: rgba(17,24,39,0.03);
+}
+.clItem{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+body.theme-day .clItem{ border-bottom-color: rgba(17,24,39,0.10); }
+.clItem:last-child{ border-bottom:none; }
+.clName{ font-weight: 1000; }
+.clDel{
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.92);
+  padding: 8px 10px;
+  font-weight: 1000;
+  cursor:pointer;
+}
+body.theme-day .clDel{
+  border-color: rgba(17,24,39,0.12);
+  background: rgba(17,24,39,0.05);
+  color: rgba(17,24,39,0.92);
+}
+
+
+/* ===== Saatler (Zaman Tablosu) ===== */
+.hoursGrid{ display:flex; flex-direction:column; gap: 12px; }
+.hoursRow{ display:flex; gap: 12px; }
+.hoursCell{ flex: 1 1 0; min-width: 0; }
+.hoursLbl{
+  font-size: 12px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 6px;
+}
+body.theme-day .hoursLbl{ color: rgba(17,24,39,0.70); }
+.dkWrap{
+  display:flex; align-items:center; gap: 8px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.05);
+  padding: 0 10px;
+  height: 44px;
+}
+body.theme-day .dkWrap{
+  border-color: rgba(17,24,39,0.14);
+  background: rgba(17,24,39,0.04);
+}
+.dkInp{
+  flex: 1 1 auto;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: rgba(255,255,255,0.92);
+  font-weight: 1000;
+  font-size: 14px;
+  outline:none;
+}
+body.theme-day .dkInp{ color: rgba(17,24,39,0.92); }
+.dkTxt{
+  flex: 0 0 auto;
+  font-weight: 1000;
+  color: rgba(255,255,255,0.78);
+}
+body.theme-day .dkTxt{ color: rgba(17,24,39,0.70); }
+
+@media (max-width: 420px){
+  .hoursRow{ flex-direction:column; }
+}
+
+
+/* ===== Günler: aktif gün + ders satır editörü ===== */
+.activeDaysGrid{
+  display:grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+@media (max-width: 420px){
+  .activeDaysGrid{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.dayToggle{
+  border-radius: 16px;
+  padding: 12px 10px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.92);
+  font-weight: 1100;
+  cursor:pointer;
+  text-align:center;
+}
+.dayToggle.on{
+  border-color: rgba(255,153,0,0.55);
+  background: rgba(255,153,0,0.18);
+}
+body.theme-day .dayToggle{
+  border-color: rgba(17,24,39,0.12);
+  background: rgba(17,24,39,0.04);
+  color: rgba(17,24,39,0.92);
+}
+body.theme-day .dayToggle.on{
+  border-color: rgba(255,153,0,0.70);
+  background: rgba(255,153,0,0.18);
+}
+
+.lessonEditTable{
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.03);
+  overflow:hidden;
+}
+body.theme-day .lessonEditTable{
+  border-color: rgba(17,24,39,0.10);
+  background: rgba(17,24,39,0.03);
+}
+.lessonEditHead, .lessonEditRow{
+  display:grid;
+  grid-template-columns: 44px 1fr 1fr 110px;
+  gap: 10px;
+  align-items:center;
+  padding: 10px 10px;
+}
+.lessonEditHead{
+  font-weight: 1100;
+  color: rgba(255,255,255,0.72);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+body.theme-day .lessonEditHead{
+  color: rgba(17,24,39,0.70);
+  border-bottom-color: rgba(17,24,39,0.10);
+}
+.lessonEditRow{
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.lessonEditRow:last-child{ border-bottom:none; }
+
+.leNo{
+  font-weight: 1200;
+  opacity: .9;
+}
+.leInp{
+  width:100%;
+  min-width:0;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.92);
+  padding: 10px 10px;
+  font-weight: 1000;
+  outline:none;
+}
+body.theme-day .leInp{
+  border-color: rgba(17,24,39,0.14);
+  background: rgba(17,24,39,0.04);
+  color: rgba(17,24,39,0.92);
+}
+.leTime{
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 420px){
+  .lessonEditHead, .lessonEditRow{
+    grid-template-columns: 38px 1fr 1fr 96px;
+    gap: 8px;
+  }
+}
+
+
+/* ===== Günler: select görünümü ===== */
+.leSel{
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, rgba(255,255,255,0.70) 50%), 
+                    linear-gradient(135deg, rgba(255,255,255,0.70) 50%, transparent 50%);
+  background-position: calc(100% - 16px) 50%, calc(100% - 11px) 50%;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 32px;
+}
+body.theme-day .leSel{
+  background-image: linear-gradient(45deg, transparent 50%, rgba(17,24,39,0.60) 50%), 
+                    linear-gradient(135deg, rgba(17,24,39,0.60) 50%, transparent 50%);
+}
+
+
+/* ===== Ayarlar: Kaydet Butonu ===== */
+.settingsSave{
+  border-radius: 16px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255,153,0,0.65);
+  background: rgba(255,153,0,0.22);
+  color: rgba(255,255,255,0.96);
+  font-weight: 1100;
+  cursor: pointer;
+}
+body.theme-day .settingsSave{
+  color: rgba(17,24,39,0.96);
+}
+.settingsSave:active{ transform: translateY(1px); }
+
+
+/* ===== Toast (Kaydedildi) ===== */
+.toast{
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  max-width: calc(100vw - 24px);
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(15,23,42,0.92);
+  color: rgba(255,255,255,0.95);
+  font-weight: 1100;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9000;
+  transition: opacity .18s ease, transform .18s ease;
+}
+.toast.show{
+  opacity: 1;
+  transform: translateX(-50%) translateY(-2px);
+}
+body.theme-day .toast{
+  background: rgba(255,255,255,0.94);
+  color: rgba(17,24,39,0.95);
+  border-color: rgba(17,24,39,0.14);
+}
+
+
+/* ===== Web dropdown görünürlük fix (select/option) ===== */
+.leSel, .leSel option{
+  color: rgba(255,255,255,0.92);
+}
+body.theme-day .leSel, body.theme-day .leSel option{
+  color: rgba(17,24,39,0.92);
+}
+/* bazı tarayıcılarda option arka planını da zorlamak gerekir */
+body.theme-day .leSel option{ background: #ffffff; }
+body.theme-night .leSel option{ background: #0b1220; }
+
+
+/* ===== Ayarlar: select/clInp görünürlük (Gün seç / Ders sayısı) ===== */
+select.clInp{
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, rgba(255,255,255,0.70) 50%), 
+                    linear-gradient(135deg, rgba(255,255,255,0.70) 50%, transparent 50%);
+  background-position: calc(100% - 16px) 50%, calc(100% - 11px) 50%;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 32px;
+}
+select.clInp, select.clInp option{
+  color: rgba(255,255,255,0.92);
+}
+body.theme-day select.clInp, body.theme-day select.clInp option{
+  color: rgba(17,24,39,0.92);
+}
+body.theme-day select.clInp option{ background:#ffffff; }
+body.theme-night select.clInp option{ background:#0b1220; }
+
+
+/* ===== Haftalık: Tema uyumu + daraltma ===== */
+.weeklyGrid{
+  width: 100%;
+  overflow-x: auto;
+}
+.weeklyTable{
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 6px;
+  table-layout: fixed;
+}
+.weeklyTable th, .weeklyTable td{
+  border-radius: 14px;
+  padding: 8px 8px;
+  vertical-align: top;
+  word-break: break-word;
+}
+/* gece varsayılan */
+.weeklyTable th{
+  background: rgba(255,153,0,0.18);
+  border: 1px solid rgba(255,153,0,0.35);
+  color: rgba(255,255,255,0.92);
+  font-weight: 1100;
+  font-size: 12px;
+}
+.weeklyTable td{
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  color: rgba(255,255,255,0.92);
+  font-size: 12px;
+}
+body.theme-day .weeklyTable th{
+  background: rgba(255,153,0,0.22);
+  border-color: rgba(255,153,0,0.45);
+  color: rgba(17,24,39,0.95);
+}
+body.theme-day .weeklyTable td{
+  background: rgba(17,24,39,0.04);
+  border-color: rgba(17,24,39,0.12);
+  color: rgba(17,24,39,0.92);
+}
+body.theme-day .wLes{ color: rgba(20,24,30,0.95) !important; }
+
+/* Günleri daralt */
+.weeklyTable th.dayHead{
+  padding: 6px 6px;
+  font-size: 11px;
+}
+/* Ders metni kısaltma görünümü */
+.wCellLine{
+  line-height: 1.15;
+}
+.wCellLine .wCls{
+  font-weight: 1100;
+  opacity: 0.95;
+}
+.wCellLine .wLes{
+  opacity: 0.95;
+}
+
+
+/* ===== Haftalık: Gündüz modu yazı görünürlük fix (güvenli) ===== */
+body.theme-day .weeklyTable th,
+body.theme-day .weeklyTable td{
+  color: rgba(17,24,39,0.92);
+}
+body.theme-day .weeklyTable td *,
+body.theme-day .weeklyTable th *{
+  color: rgba(17,24,39,0.92);
+}
+
+
+/* Day mode: weekly lesson text black (except day labels) */
+body.day-mode .weekly-table .cell .lesson,
+body.day-mode .weekly-table .cell .lesson-name,
+body.day-mode .weekly-table td .lesson,
+body.day-mode .weekly-table td .lesson-name {
+  color: #000 !important;
+}
+
 </style>
+
+<style>
+/* Haftalık - Gündüz modunda yazılar siyah (gün etiketleri hariç) */
+body.light .weekly-table,
+body.light .weekly-table td,
+body.light .weekly-table th,
+body.light .weekly-cell,
+body.light .weekly-cell .lesson,
+body.light .weekly-cell .cls,
+body.light .weekly-cell .time {
+  color: #111 !important;
+}
+
+/* Gün etiketlerini (PZT, SAL, ...) beyaz bırak */
+body.light .weekly-day,
+body.light .weekly-day-label {
+  color: #fff !important;
+}
+
+/* Day mode: weekly lesson text black (except day labels) */
+body.day-mode .weekly-table .cell .lesson,
+body.day-mode .weekly-table .cell .lesson-name,
+body.day-mode .weekly-table td .lesson,
+body.day-mode .weekly-table td .lesson-name {
+  color: #000 !important;
+}
+
+</style>
+
+
+<style>
+/* FORCE: Weekly lesson names black in DAY mode */
+body.light-mode .weekly-table .lesson,
+body.light-mode .weekly-table .week-cell .lesson,
+body.light-mode .weekly-table td .lesson,
+body.light-mode .weekly-table .cell-lesson,
+body.light-mode .weekly-table .cell .lesson {
+    color: #000 !important;
+}
+</style>
+
 </head>
 
 <body>
+<button id="btnSettings" class="settingsBtn" type="button" aria-label="Ayarlar" title="Ayarlar">⚙️</button>
+
   <div class="app">
     <div class="scrollArea">
 
@@ -694,7 +1321,7 @@
     const DAYS = ["Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi","Pazar"];
 
     // Demo program (sonraki adımda senin gerçek tablo/verilerine göre dolduracağız)
-    const timetable = {
+    const demoTimetable = {
       0: [
         {no:1, time:"08:15-08:55", cls:"12/J", lesson:"KELAM"},
         {no:2, time:"09:05-09:45", cls:"12/J", lesson:"KELAM"},
@@ -713,11 +1340,68 @@
       6: [{no:1,time:"08:15-08:55",cls:"10/B",lesson:"SİYER"}],
     };
 
+    // Ayarlar > Günler'de girilen dersleri ana sayfaya bağla
+    const KEY_DAYLESSONS = "DTK_dayLessons_v1"; // {0:[{no,cls,lesson,time}], ...}
+    function loadTimetableFromSettings(){
+      try{
+        const raw = localStorage.getItem(KEY_DAYLESSONS);
+        if(!raw) return null;
+        const obj = JSON.parse(raw);
+        if(!obj || typeof obj !== "object") return null;
+
+        const t = {};
+        for(let d=0; d<7; d++){
+          const arr = Array.isArray(obj[d]) ? obj[d] : [];
+          const clean = arr
+            .map(x=>({
+              no: Number(x.no)||0,
+              time: String(x.time||"").trim(),
+              cls: String(x.cls||"").trim(),
+              lesson: String(x.lesson||"").trim(),
+            }))
+            .filter(x=>x.no>0 && (x.cls || x.lesson || x.time)); // boş satırları at
+          clean.sort((a,b)=>a.no-b.no);
+          t[d] = clean;
+        }
+        // en az bir gün doluysa geçerli say
+        const hasAny = Object.values(t).some(a=>Array.isArray(a) && a.length);
+        return hasAny ? t : null;
+      }catch(e){
+        return null;
+      }
+    }
+
+    let timetable = loadTimetableFromSettings() || demoTimetable;
+
+    // Ana sayfayı anında güncellemek için (web/telefon aynı davranış)
+    window.__refreshTimetableFromSettings = function(){
+      try{
+        timetable = loadTimetableFromSettings() || demoTimetable;
+      }catch(e){}
+    };
+
+
+
     const STORE_KEY = "ders_takip_notes_v1";
 
     function loadStore(){
       try{
-        return JSON.parse(localStorage.getItem(STORE_KEY) || "{}");
+        const raw = JSON.parse(localStorage.getItem(STORE_KEY) || "{}");
+        // Eski anahtarlar: gun|no|sinif|ders -> yeni anahtar: gun|no
+        let changed = false;
+        for (const k of Object.keys(raw)){
+          const parts = String(k).split("|");
+          if (parts.length >= 3){
+            const nk = parts[0] + "|" + parts[1];
+            if (!(nk in raw)) raw[nk] = raw[k];
+            delete raw[k];
+            changed = true;
+          }
+        }
+        if (changed){
+          localStorage.setItem(STORE_KEY, JSON.stringify(raw));
+        }
+        return raw;
       }catch(e){
         return {};
       }
@@ -728,8 +1412,8 @@
 
     // Her satıra stabil bir id üretelim
     function lessonId(dayIndex, row){
-      // Aynı gün içinde no+class+lesson benzersiz olsun
-      return [dayIndex, row.no, row.cls, row.lesson].join("|");
+      // Notların derse bağlı kimliği: gün + ders no (saat/sınıf/ders değişse de not kaybolmasın)
+      return dayIndex + "|" + String(row.no);
     }
 
     // Bugün hangi gün? (TR: Pazar=0 gelir, biz Pzt=0 istiyoruz)
@@ -737,6 +1421,16 @@
       const d = new Date();
       const js = d.getDay(); // 0 Pazar ... 6 Cumartesi
       return (js + 6) % 7;   // 0 Pazartesi ... 6 Pazar
+    }
+
+    // ===== Aktif Günler (Ayarlar > Günler) =====
+    const KEY_ACTIVE_DAYS = "DTK_activeDays_v1"; // [bool x7] Pazartesi=0
+    function getActiveDaysArray(){
+      try{
+        const a = JSON.parse(localStorage.getItem(KEY_ACTIVE_DAYS) || "null");
+        if(Array.isArray(a) && a.length === 7) return a.map(Boolean);
+      }catch(e){}
+      return [true,true,true,true,true,false,false]; // varsayılan
     }
 
     function ymd(dateObj){
@@ -758,24 +1452,21 @@
     // - Kayıt varsa (ödev veya not dolu) => nokta ON
     // - Sınav tarihi bugünden itibaren 0..2 gün içinde => nokta ON
     function shouldShowDot(dayIndex, id, store){
-      // KURAL:
-      // - SADECE bugünün tarihinde olan derslerde göster
-      // - ÖDEV veya NOT varsa göster
-      // - Sınav tarihi varsa ve 0–2 gün kaldıysa göster
-      if(dayIndex !== todayIndex()) return false;
-
-      const item = store[id];
+      // SATIR BAŞI TURUNCU NOKTA:
+      // - Bu ders için ÖDEV veya NOT varsa: her zaman göster
+      // - Sınav tarihi varsa ve 0–2 gün kaldıysa: göster
+      const item = store && store[id];
       if(!item) return false;
 
       const hasHomeworkOrNote =
-        (item.homework && item.homework.trim()) ||
-        (item.note && item.note.trim());
+        (item.homework && String(item.homework).trim()) ||
+        (item.note && String(item.note).trim());
 
       if(hasHomeworkOrNote) return true;
 
       if(item.examDate){
-        const diff = daysBetween(ymd(new Date()), item.examDate);
-        if(diff >= 0 && diff <= 2) return true;
+        const diff = daysBetween(ymd(new Date()), String(item.examDate).trim());
+        if(diff !== null && diff >= 0 && diff <= 2) return true;
       }
       return false;
     }
@@ -834,7 +1525,7 @@
           <div class="no">${r.no}</div>
           <div class="time">${r.time}</div>
           <div class="class">${r.cls}</div>
-          <div class="lesson" title="${escapeHtml(r.lesson)}">${escapeHtml(r.lesson)}</div>
+          <div class="lesson" title="${escapeHtml((r.lesson||""))}">${escapeHtml((r.lesson||""))}</div>
         `;
 
         // row grid: dot + no + time + class + lesson şeklinde kurmak için
@@ -866,16 +1557,73 @@
       }
     }
 
+    // dışarıdan tetiklemek için
+    window.addEventListener('dtk:settings-updated', function(){
+      try{ timetable = loadTimetableFromSettings() || demoTimetable; }catch(e){}
+      try{ renderAllPages(); refreshDots(); }catch(e){}
+      try{ if(typeof window.renderWeeklyGrid==='function') window.renderWeeklyGrid(); }catch(e){}
+    });
+
+    window.renderDailyPages = function(){
+      try{ timetable = loadTimetableFromSettings() || demoTimetable; }catch(e){}
+      try{ renderAllPages(); refreshDots(); }catch(e){}
+    };
+
     function refreshDots(){
-      // aktif sayfadaki dotları güncelle (aslında hepsini)
-      const store = loadStore();
-      document.querySelectorAll(".row").forEach(row=>{
-        const id = row.dataset.id;
-        const day = Number(row.dataset.day);
-        const dot = row.querySelector(".dot");
-        if(!dot) return;
-        dot.classList.toggle("on", shouldShowDot(day, id, store));
-      });
+      // SADECE NOKTALARI GÜNCELLE (linkleri etkileme)
+      let store = {};
+      try{ store = loadStore(); }catch(e){ store = {}; }
+
+      // 1) Herhangi bir günde kaydı olan dersler
+      const lessonsWithRecord = new Set();
+      try{
+        Object.keys(store||{}).forEach(id=>{
+          const it = store[id];
+          if(!it) return;
+          const hasText = (it.homework && String(it.homework).trim()) || (it.note && String(it.note).trim());
+          const hasExam = it.examDate && String(it.examDate).trim();
+          const lesson = it.meta && it.meta.lesson ? String(it.meta.lesson).trim() : "";
+          if(lesson && (hasText || hasExam)) lessonsWithRecord.add(lesson);
+        });
+      }catch(e){}
+
+      // 2) Bu sayfadaki her ders için "o günün ilk dersi" numarası
+      const firstNoByLesson = {};
+      try{
+        document.querySelectorAll(".row").forEach(row=>{
+          const lessonEl = row.querySelector(".lesson");
+          const noEl = row.querySelector(".no");
+          if(!lessonEl || !noEl) return;
+          const lesson = String(lessonEl.textContent||"").trim();
+          const no = parseInt(String(noEl.textContent||"").trim(), 10);
+          if(!lesson || !Number.isFinite(no)) return;
+          if(firstNoByLesson[lesson]==null || no < firstNoByLesson[lesson]) firstNoByLesson[lesson]=no;
+        });
+      }catch(e){}
+
+      // 3) Noktaları yak
+      try{
+        document.querySelectorAll(".row").forEach(row=>{
+          const id = row.dataset ? row.dataset.id : null;
+          const day = row.dataset ? Number(row.dataset.day) : NaN;
+          const dot = row.querySelector(".dot");
+          if(!dot || !id) return;
+
+          const own = shouldShowDot(day, id, store);
+          if(own){
+            dot.classList.add("on");
+            return;
+          }
+
+          const lessonEl = row.querySelector(".lesson");
+          const noEl = row.querySelector(".no");
+          const lesson = lessonEl ? String(lessonEl.textContent||"").trim() : "";
+          const no = noEl ? parseInt(String(noEl.textContent||"").trim(), 10) : NaN;
+
+          const cross = lesson && Number.isFinite(no) && firstNoByLesson[lesson] === no && lessonsWithRecord.has(lesson);
+          dot.classList.toggle("on", !!cross);
+        });
+      }catch(e){}
     }
 
     /***********************
@@ -1068,8 +1816,27 @@
     const daySwipe = document.getElementById("daySwipe");
     let activeDay = 0;
 
-    function setActiveDay(index){
-      activeDay = (index + 7) % 7;
+    function setActiveDay(index, dirHint=0){
+      const active = getActiveDaysArray();
+
+      let i = (index + 7) % 7;
+      if(!active[i]){
+        if(dirHint === 0) dirHint = 1;
+        let tries = 0;
+        let j = i;
+        while(tries < 7 && !active[j]){
+          j = (j + dirHint + 7) % 7;
+          tries++;
+        }
+        i = j;
+      }
+      activeDay = i;
+
+      // sekmelerde sadece aktif günleri göster
+      dayTabs.forEach(b=>{
+        const d = Number(b.dataset.day);
+        b.style.display = active[d] ? "" : "none";
+      });
 
       dayTabs.forEach(b => b.classList.remove("active"));
       const btn = dayTabs.find(b => Number(b.dataset.day) === activeDay);
@@ -1079,10 +1846,9 @@
       }
 
       dayTrack.style.transform = `translateX(-${activeDay * (100/7)}%)`;
-      // nokta kuralı bugüne bağlı olduğu için yenile
+      // nokta kural
       refreshDots();
       refreshNotesDot();
-    refreshNotesDot();
     }
 
     dayTabs.forEach(btn=>{
@@ -1106,8 +1872,8 @@
       if(!dragging) return;
       dragging = false;
       const dx = curX - startX;
-      if(dx < -40) setActiveDay(activeDay + 1);
-      else if(dx > 40) setActiveDay(activeDay - 1);
+      if(dx < -40) setActiveDay(activeDay + 1, 1);
+      else if(dx > 40) setActiveDay(activeDay - 1, -1);
     });
 
     /***********************
@@ -1338,36 +2104,49 @@
      * - Tıklama yok (sadece görünüm)
      ************************/
     
-    function shortLessonName(name){
-      const s = String(name || "").trim();
-      if(!s) return "";
-      // İstersen burayı zamanla senin ders isimlerine göre genişletiriz:
+    function shortLessonName(name, maxLen=12){
+      const raw = String(name || "").trim();
+      if(!raw) return "";
+
+      // Normalize: Turkish uppercase + remove punctuation/apostrophes for robust matching
+      const up = raw
+        .toLocaleUpperCase('tr-TR')
+        .replace(/[’'`]/g, "")          // apostrophes
+        .replace(/[^0-9A-ZĞÜŞİÖÇ\s]/g, " ") // other punctuation -> space
+        .replace(/\s+/g, " ")
+        .trim();
+
+      // Common abbreviations (you can extend anytime)
       const MAP = {
-        "KURAN-I KERİM":"KURAN",
-        "KURAN-I KERIM":"KURAN",
+        "KURAN I KERİM":"KURAN",
+        "KURAN I KERIM":"KURAN",
         "MESLEKİ ARAPÇA":"MSARP",
         "MESLEKI ARAPCA":"MSARP",
         "İSLAM KÜLTÜR VE MEDENİYETİ":"İKVM",
         "ISLAM KULTUR VE MEDENIYETI":"İKVM",
         "TEMEL DİNİ BİLGİLER":"TDB",
         "TEMEL DINI BILGILER":"TDB",
-        "AKAİD":"AKAİD",
-        "AKAID":"AKAİD",
-        "TEFSİR":"TEFSİR",
-        "TEFSIR":"TEFSİR",
         "FIKIH":"FIKIH",
-        "FIKIH ":"FIKIH",
+        "TEFSİR":"TEFS",
+        "TEFSIR":"TEFS",
+        "SİYER":"SİYR",
+        "SIYER":"SİYR",
         "KELAM":"KELAM",
-        "NÖBET":"NÖBET",
-        "NOBET":"NÖBET"
+        "NÖBET":"NÖBT",
+        "NOBET":"NÖBT"
       };
-      const up = s.toUpperCase().replace(/\s+/g," ").trim();
+
       if(MAP[up]) return MAP[up];
 
-      // Otomatik kısaltma: 12 karakteri geçerse kısalt
-      const max = 12;
-      if(up.length <= max) return s;
-      return s.slice(0, max-1).trim() + "…";
+      // Fallback: build initials (up to 4) for multi-word names, otherwise trim by length
+      const parts = up.split(" ").filter(Boolean);
+      if(parts.length >= 2){
+        const initials = parts.map(p => p[0]).join("").slice(0, 4);
+        return initials || raw.slice(0, maxLen);
+      }
+
+      // Single word: trim to maxLen (no ellipsis in compact views)
+      return raw.length <= maxLen ? raw : raw.slice(0, maxLen);
     }
 
     
@@ -1390,6 +2169,20 @@
     }
 
     window.renderWeeklyGrid = function(){
+      // Haftalık görünüm için ders adı kısaltma (güvenli)
+      function __shortLessonWeekly(name){
+        const s = String(name||"").trim();
+        if(!s) return "";
+        const parts = s.split(/\s+/).filter(Boolean);
+        if(parts.length >= 2){
+          return parts.map(p=>p[0].toUpperCase()).join("").slice(0,4);
+        }
+        return s.length > 6 ? (s.slice(0,6) + "…") : s;
+      }
+
+      try{ timetable = loadTimetableFromSettings() || demoTimetable; }catch(e){}
+
+      const active = getActiveDaysArray();
       const wrap = document.getElementById("weeklyGridWrap");
       if(!wrap) return;
       wrap.innerHTML = "";
@@ -1397,6 +2190,7 @@
       // en fazla kaç ders var?
       let maxLessons = 0;
       for(let d=0; d<7; d++){
+        if(!active[d]) continue;
         const rows = timetable[d] || [];
         if(rows.length > maxLessons) maxLessons = rows.length;
       }
@@ -1420,6 +2214,7 @@
         // zamanı ilk bulunan günden al
         let time = "";
         for(let d=0; d<7; d++){
+          if(!active[d]) continue;
           const r = (timetable[d]||[])[i];
           if(r && r.time){ time = r.time; break; }
         }
@@ -1435,6 +2230,7 @@
 
       const tbody = document.createElement("tbody");
       for(let d=0; d<7; d++){
+        if(!active[d]) continue;
         const rows = timetable[d] || [];
         if(rows.length === 0) continue;
 
@@ -1467,8 +2263,976 @@
       wrap.appendChild(table);
     };
 
+
+  // ===== Gündüz / Gece Modu =====
+  (function(){
+    const KEY = "DTK_theme_v1"; // "day" | "night"
+    const btnDay = document.getElementById("btnModeDay");
+    const btnNight = document.getElementById("btnModeNight");
+
+    function apply(mode){
+      const m = (mode === "day") ? "day" : "night";
+      document.body.classList.toggle("theme-day", m === "day");
+      document.body.classList.toggle("theme-night", m === "night"); // gece modunda :root değerleri kullanılır
+
+      if(btnDay && btnNight){
+        btnDay.classList.toggle("active", m === "day");
+        btnNight.classList.toggle("active", m === "night");
+      }
+      try{ localStorage.setItem(KEY, m); }catch(e){}
+    }
+
+    // load
+    let saved = "night";
+    try{
+      const v = localStorage.getItem(KEY);
+      if(v === "day" || v === "night") saved = v;
+    }catch(e){}
+    apply(saved);
+
+    if(btnDay){
+      btnDay.addEventListener("click", ()=>apply("day"));
+      btnDay.addEventListener("touchstart", (e)=>{ e.preventDefault(); apply("day"); }, {passive:false});
+    }
+    if(btnNight){
+      btnNight.addEventListener("click", ()=>apply("night"));
+      btnNight.addEventListener("touchstart", (e)=>{ e.preventDefault(); apply("night"); }, {passive:false});
+    }
+  })();
+
 </script>
 </div>
+
+
+<!-- ===== AYARLAR (Overlay) ===== -->
+<div id="settingsOverlay" class="settingsOverlay" aria-hidden="true">
+  <div class="settingsBackdrop" data-close="1"></div>
+  <div class="settingsPanel" role="dialog" aria-modal="true" aria-label="Ayarlar">
+    <div class="settingsTop">
+      <div class="settingsTitle">AYARLAR</div>
+      <button id="btnSettingsSave" class="settingsSave" type="button">Kaydet</button>
+      <button id="btnSettingsClose" class="settingsClose" type="button">Kapat</button>
+    </div>
+    <div class="settingsBody">
+      <div class="settingsHint">Şimdilik sadece panel aç/kapa bağlantısı yapıldı. İçerikleri sırayla ekleyeceğiz.</div>
+
+      <div class="settingsRow modeToggle" aria-label="Tema">
+        <button id="btnModeDay" class="settingsChip active" type="button" onclick="window.__setTheme && window.__setTheme(\'day\')" >Gündüz Modu</button>
+        <button id="btnModeNight" class="settingsChip" type="button" onclick="window.__setTheme && window.__setTheme(\'night\')" >Gece Modu</button>
+      </div>
+
+      <div class="settingsRow" style="margin-top:14px">
+        <button id="btnSettingsDays" class="settingsChip" type="button">Günler</button>
+        <button id="btnSettingsHours" class="settingsChip" type="button">Saatler</button>
+      </div>
+      <div class="settingsRow" style="margin-top:10px">
+        <button id="btnSettingsClass" class="settingsChip" type="button">Sınıf Ekle</button>
+        <button id="btnSettingsLesson" class="settingsChip" type="button">Ders Ekle</button>
+      </div>
+
+
+      <div id="settingsContent" class="settingsHint" style="margin-top:14px; opacity:.85">
+        (İçerik daha sonra gelecek)
+      </div>
+      
+      <!-- ===== Saatler ===== -->
+      
+      <!-- ===== Günler ===== -->
+      <div id="daysSection" style="margin-top:12px; display:none">
+        <div class="settingsHint" style="margin-top:0; opacity:1">Aktif Günler</div>
+
+        <div id="activeDaysGrid" class="activeDaysGrid" style="margin-top:10px"></div>
+
+        <div class="settingsHint" style="margin-top:14px; opacity:1">Günlük Ders Sayısı</div>
+        <div class="hoursRow" style="margin-top:8px">
+          <div class="hoursCell">
+            <div class="hoursLbl">Gün seç</div>
+            <select id="selDayForCount" class="clInp"></select>
+          </div>
+          <div class="hoursCell">
+            <div class="hoursLbl">Ders sayısı</div>
+            <select id="selLessonCount" class="clInp">
+              <option value="0">0</option>
+              <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+              <option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option>
+              <option value="9">9</option><option value="10">10</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="dayLessonEditor" style="margin-top:14px"></div>
+      </div>
+
+<div id="hoursSection" style="margin-top:12px; display:none">
+        <div class="settingsHint" style="margin-top:0; opacity:1">Zaman Tablosu</div>
+
+        <div class="hoursGrid" style="margin-top:10px">
+          <div class="hoursRow">
+            <div class="hoursCell">
+              <div class="hoursLbl">Başlangıç Saati</div>
+              <input id="inpStartTime" class="clInp" type="time" value="08:15" />
+            </div>
+            <div class="hoursCell">
+              <div class="hoursLbl">Teneffüs</div>
+              <div class="dkWrap">
+                <input id="inpBreakMin" class="dkInp" type="number" inputmode="numeric" min="0" step="1" value="10" />
+                <span class="dkTxt">dk</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hoursRow">
+            <div class="hoursCell">
+              <div class="hoursLbl">Öğlen arası</div>
+              <div class="dkWrap">
+                <input id="inpLunchMin" class="dkInp" type="number" inputmode="numeric" min="0" step="1" value="45" />
+                <span class="dkTxt">dk</span>
+              </div>
+            </div>
+            <div class="hoursCell">
+              <div class="hoursLbl">Öğleden sonra ders no</div>
+              <input id="inpAfterNo" class="clInp" type="number" inputmode="numeric" min="1" step="1" value="6" />
+            </div>
+          </div>
+        </div>
+
+        <div class="btnRow" style="margin-top:12px">
+          <button id="btnSaveHours" class="clBtn" type="button">Kaydet</button>
+        </div>
+        <div class="settingsHint" style="margin-top:10px">Şimdilik bu temel ayarlar kaydedilecek. Sonraki adımda ders süreleri ve gün bazlı ders sayısı ekleyeceğiz.</div>
+      </div>
+<div id="classLessonForms" style="margin-top:12px; display:none">
+        <div id="classForm" style="display:none">
+          <div class="settingsHint" style="margin-top:0; opacity:1">Sınıf/Şube ekle (örn: 10/A)</div>
+          <div class="clRow" style="margin-top:8px">
+            <input id="inpClassName" class="clInp" inputmode="text" placeholder="10/A" />
+            <button id="btnAddClass" class="clBtn" type="button">Ekle</button>
+          </div>
+          <div id="classList" class="clList" style="margin-top:10px"></div>
+        </div>
+
+        <div id="lessonForm" style="display:none">
+          <div class="settingsHint" style="margin-top:0; opacity:1">Ders ekle (örn: Matematik)</div>
+          <div class="clRow" style="margin-top:8px">
+            <input id="inpLessonName" class="clInp" inputmode="text" placeholder="Matematik" />
+            <button id="btnAddLesson" class="clBtn" type="button">Ekle</button>
+          </div>
+          <div id="lessonList" class="clList" style="margin-top:10px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  // ===== Ayarlar Overlay: Aç / Kapat (izole) =====
+  window.openSettingsOverlay = function(){
+    const overlay = document.getElementById("settingsOverlay");
+    if(!overlay) return;
+    overlay.classList.add("open");
+    overlay.style.display = "block";
+    overlay.setAttribute("aria-hidden","false");
+    document.body.style.overflow = "hidden";
+  };
+
+  window.closeSettingsOverlay = function(){
+    const overlay = document.getElementById("settingsOverlay");
+    if(!overlay) return;
+    overlay.classList.remove("open");
+    overlay.style.display = "";
+    overlay.setAttribute("aria-hidden","true");
+    document.body.style.overflow = "";
+  };
+
+  (function(){
+    const btn = document.getElementById("btnSettings");
+    const btnClose = document.getElementById("btnSettingsClose");
+    const overlay = document.getElementById("settingsOverlay");
+
+    if(btn){
+      btn.addEventListener("click", window.openSettingsOverlay);
+      btn.addEventListener("touchstart", function(e){ e.preventDefault(); window.openSettingsOverlay(); }, {passive:false});
+    }
+    if(btnClose){
+      btnClose.addEventListener("click", window.closeSettingsOverlay);
+      btnClose.addEventListener("touchstart", function(e){ e.preventDefault(); window.closeSettingsOverlay(); }, {passive:false});
+    }
+    if(overlay){
+      overlay.addEventListener("click", function(e){
+        if(e.target && e.target.dataset && e.target.dataset.close === "1"){
+          window.closeSettingsOverlay();
+        }
+      });
+    }
+  })();
+
+  // ===== Ayarlar İçerikleri =====
+  const DAY_NAMES_FULL = ["Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi","Pazar"];
+  const DAY_NAMES_SHORT = ["Pzt","Sal","Çar","Per","Cum","Cmt","Paz"];
+
+  function __lsGet(key, fallback){
+    try{ const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }catch(e){ return fallback; }
+  }
+  function __lsSet(key, val){
+    try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){}
+  }
+
+  function getActiveDays(){
+    const saved = __lsGet("dt_activeDays", null);
+    if(Array.isArray(saved) && saved.length){ return saved.filter(n=>Number.isInteger(n) && n>=0 && n<=6); }
+    return [0,1,2,3,4,5,6];
+  }
+
+  function setActiveDays(arr){
+    const uniq = Array.from(new Set(arr)).sort((a,b)=>a-b);
+    __lsSet("dt_activeDays", uniq.length ? uniq : [0,1,2,3,4,5,6]);
+    applyActiveDaysToUI();
+  }
+
+  function applyActiveDaysToUI(){
+    const active = new Set(getActiveDays());
+
+    // Günlük sekmesindeki gün butonları
+    const dayTabsEl = document.getElementById("dayTabs");
+    if(dayTabsEl){
+      const tabs = Array.from(dayTabsEl.querySelectorAll(".dayTab"));
+      tabs.forEach(btn=>{
+        const d = parseInt(btn.getAttribute("data-day"),10);
+        btn.style.display = active.has(d) ? "" : "none";
+      });
+
+      // Gün sekmesi yatay kaydırılmışsa (özellikle günleri kapat/aç yaptıktan sonra) boş görünmesin diye sıfırla
+      dayTabsEl.scrollLeft = 0;
+
+      // Aktif olmayan güne kalındıysa ilk aktife geçir
+      const current = parseInt(dayTabsEl.querySelector(".dayTab.active")?.getAttribute("data-day")||"0",10);
+      if(!active.has(current)){
+        const first = tabs.find(b=>active.has(parseInt(b.getAttribute("data-day"),10)));
+        if(first){ first.click(); }
+      }
+    }
+
+    // Haftalık tablo satırları (varsa)
+    const weeklyTable = document.getElementById("weeklyGrid");
+    if(weeklyTable){
+      const rows = Array.from(weeklyTable.querySelectorAll("[data-wday]"));
+      rows.forEach(r=>{
+        const d = parseInt(r.getAttribute("data-wday"),10);
+        r.style.display = active.has(d) ? "" : "none";
+      });
+    }
+  }
+
+  function getDayLessonCounts(){
+    const m = __lsGet("dt_dayLessonCounts", {});
+    return (m && typeof m === "object") ? m : {};
+  }
+  function setDayLessonCount(dayIndex, count){
+    const m = getDayLessonCounts();
+    m[String(dayIndex)] = count;
+    __lsSet("dt_dayLessonCounts", m);
+  }
+
+  function activateSettingsChip(btn){
+    document.querySelectorAll(".settingsChip").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+  }
+
+  function renderSettingsDays(){
+    const activeDays = getActiveDays();
+    const counts = getDayLessonCounts();
+
+    const toggles = DAY_NAMES_FULL.map((name, idx)=>{
+      const checked = activeDays.includes(idx) ? "checked" : "";
+      return `
+        <label class="dayToggle">
+          <input type="checkbox" data-day="${idx}" ${checked}/>
+          <span>${DAY_NAMES_SHORT[idx]} – ${name}</span>
+        </label>`;
+    }).join("");
+
+    const activeOptions = activeDays.map(d=>`<option value="${d}">${DAY_NAMES_FULL[d]}</option>`).join("");
+
+    const wrap = document.createElement("div");
+    wrap.innerHTML = `
+      <div class="helpText">Hangi günlerin görüneceğini seç. Kaydederken otomatik uygulanır.</div>
+      <div class="daysGrid">${toggles}</div>
+
+      <div class="divider"></div>
+
+      <div class="helpText">Aktif günlere özel “ders sayısı” kaydı. (Şimdilik sadece kaydedilir; saatler sayfasında kullanacağız.)</div>
+      <div class="settingsRow">
+        <label>Gün</label>
+        <select id="dayLessonSelect" class="input">${activeOptions}</select>
+      </div>
+      <div class="settingsRow">
+        <label>Ders sayısı</label>
+        <input id="dayLessonCount" class="input" type="number" min="0" max="12" value="8"/>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:12px">
+        <button class="btnSecondary" id="btnApplyDayLesson" type="button">Uygula</button>
+      </div>
+    `;
+
+    settingsContent.innerHTML = "";
+    settingsContent.appendChild(wrap);
+
+    // checkbox listeners
+    wrap.querySelectorAll('input[type="checkbox"][data-day]').forEach(cb=>{
+      cb.addEventListener("change", ()=>{
+        const day = parseInt(cb.getAttribute("data-day"),10);
+        let arr = getActiveDays();
+        if(cb.checked){
+          if(!arr.includes(day)) arr.push(day);
+        }else{
+          arr = arr.filter(x=>x!==day);
+        }
+        // en az 1 gün kalsın
+        if(arr.length===0){
+          cb.checked = true;
+          return;
+        }
+        setActiveDays(arr);
+
+        // dropdown seçeneklerini güncelle
+        const sel = wrap.querySelector("#dayLessonSelect");
+        const activeNow = getActiveDays();
+        sel.innerHTML = activeNow.map(d=>`<option value="${d}">${DAY_NAMES_FULL[d]}</option>`).join("");
+        sel.value = String(activeNow[0]);
+      });
+    });
+
+    const sel = wrap.querySelector("#dayLessonSelect");
+    const cnt = wrap.querySelector("#dayLessonCount");
+    function syncCount(){
+      const d = parseInt(sel.value,10);
+      const c = counts[String(d)];
+      cnt.value = (typeof c === "number") ? c : 8;
+    }
+    sel.addEventListener("change", syncCount);
+    syncCount();
+
+    wrap.querySelector("#btnApplyDayLesson").addEventListener("click", ()=>{
+      const d = parseInt(sel.value,10);
+      const n = Math.max(0, Math.min(12, parseInt(cnt.value,10) || 0));
+      setDayLessonCount(d, n);
+      toast && toast(`Kaydedildi: ${DAY_NAMES_SHORT[d]} → ${n} ders`);
+    });
+  }
+
+  // Günler / Saatler / Sınıf Ekle butonları (şimdilik Günler içeriği hazırlanıyor)
+  if(btnSettingsDays){
+    btnSettingsDays.addEventListener("click", ()=>{
+      activateSettingsChip(btnSettingsDays);
+      renderSettingsDays();
+    });
+  }
+
+  // Açılırken varsayılan içerik (Günler)
+  const __oldOpenSettings = openSettings;
+  openSettings = function(){
+    __oldOpenSettings();
+    // varsayılan: Günler
+    if(btnSettingsDays){
+      activateSettingsChip(btnSettingsDays);
+      renderSettingsDays();
+    }
+    applyActiveDaysToUI();
+  };
+
+  // İlk yükleme
+  window.addEventListener("load", ()=>{ applyActiveDaysToUI(); });
+
+
+</script>
+
+
+<script>
+  // ===== Tema Toggle (sağlam) =====
+  (function(){
+    const KEY = "DTK_theme_v1";
+    function apply(mode){
+      const m = (mode === "day") ? "day" : "night";
+      document.body.classList.toggle("theme-day", m === "day");
+      document.body.classList.toggle("theme-night", m === "night");
+      const bd = document.getElementById("btnModeDay");
+      const bn = document.getElementById("btnModeNight");
+      if(bd && bn){
+        bd.classList.toggle("active", m === "day");
+        bn.classList.toggle("active", m === "night");
+      }
+      try{ localStorage.setItem(KEY, m); }catch(e){}
+    }
+    window.__setTheme = apply;
+
+    // load initial
+    let saved = "night";
+    try{
+      const v = localStorage.getItem(KEY);
+      if(v === "day" || v === "night") saved = v;
+    }catch(e){}
+    apply(saved);
+
+    // Event delegation inside overlay (works even if buttons re-render)
+    document.addEventListener("click", (e)=>{
+      const t = e.target;
+      if(!t) return;
+      if(t.id === "btnModeDay") apply("day");
+      if(t.id === "btnModeNight") apply("night");
+    }, true);
+
+    document.addEventListener("touchstart", (e)=>{
+      const t = e.target;
+      if(!t) return;
+      if(t.id === "btnModeDay"){ e.preventDefault(); apply("day"); }
+      if(t.id === "btnModeNight"){ e.preventDefault(); apply("night"); }
+    }, {capture:true, passive:false});
+  })();
+</script>
+
+<script>
+
+  // ===== Sınıf / Ders Ekle (sadece giriş + liste) =====
+  (function(){
+    const KEY_CLASSES = "DTK_classes_v1";
+    const KEY_LESSONS = "DTK_lessons_v1";
+
+    const btnClass = document.getElementById("btnSettingsClass");
+    const btnLesson = document.getElementById("btnSettingsLesson");
+
+    const wrap = document.getElementById("classLessonForms");
+    const classForm = document.getElementById("classForm");
+    const lessonForm = document.getElementById("lessonForm");
+
+    const inpClass = document.getElementById("inpClassName");
+    const inpLesson = document.getElementById("inpLessonName");
+
+    const classList = document.getElementById("classList");
+    const lessonList = document.getElementById("lessonList");
+
+    let classes = [];
+    let lessons = [];
+
+    function load(){
+      try{ classes = JSON.parse(localStorage.getItem(KEY_CLASSES) || "[]"); }catch(e){ classes=[]; }
+      try{ lessons = JSON.parse(localStorage.getItem(KEY_LESSONS) || "[]"); }catch(e){ lessons=[]; }
+      if(!Array.isArray(classes)) classes = [];
+      if(!Array.isArray(lessons)) lessons = [];
+
+      // Alfabetik sırala (TR)
+      classes = classes.slice().sort((a,b)=>String(a).trim().localeCompare(String(b).trim(),'tr',{sensitivity:'base'}));
+      lessons = lessons.slice().sort((a,b)=>String(a).trim().localeCompare(String(b).trim(),'tr',{sensitivity:'base'}));
+    }
+    function save(){
+      // Alfabetik sırala (TR) -> kayda bu sırayla yaz
+      classes = (Array.isArray(classes)? classes.slice(): []).sort((a,b)=>String(a).trim().localeCompare(String(b).trim(),'tr',{sensitivity:'base'}));
+      lessons = (Array.isArray(lessons)? lessons.slice(): []).sort((a,b)=>String(a).trim().localeCompare(String(b).trim(),'tr',{sensitivity:'base'}));
+
+      try{ localStorage.setItem(KEY_CLASSES, JSON.stringify(classes)); }catch(e){}
+      try{ localStorage.setItem(KEY_LESSONS, JSON.stringify(lessons)); }catch(e){}
+    }
+
+    function render(){
+      if(classList){
+        classList.innerHTML = classes.length ? classes.map((c,idx)=>`
+          <div class="clItem" data-i="${idx}">
+            <div class="clName">${escapeHtml(c)}</div>
+            <button class="clDel" type="button" data-del="class" data-i="${idx}">Sil</button>
+          </div>
+        `).join("") : `<div class="clItem"><div class="clName" style="opacity:.75">Henüz sınıf yok</div></div>`;
+      }
+      if(lessonList){
+        lessonList.innerHTML = lessons.length ? lessons.map((l,idx)=>`
+          <div class="clItem" data-i="${idx}">
+            <div class="clName">${escapeHtml(l)}</div>
+            <button class="clDel" type="button" data-del="lesson" data-i="${idx}">Sil</button>
+          </div>
+        `).join("") : `<div class="clItem"><div class="clName" style="opacity:.75">Henüz ders yok</div></div>`;
+      }
+    }
+
+    function escapeHtml(s){
+      return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+    }
+
+    function show(which){
+      if(!wrap) return;
+      wrap.style.display = "";
+      classForm.style.display = (which === "class") ? "" : "none";
+      lessonForm.style.display = (which === "lesson") ? "" : "none";
+      if(which === "class" && inpClass){ inpClass.focus(); }
+      if(which === "lesson" && inpLesson){ inpLesson.focus(); }
+      render();
+    }
+
+    function addClass(){
+      const v = (inpClass?.value || "").trim();
+      if(!v) return;
+      if(!classes.includes(v)) classes.push(v);
+      classes.sort((a,b)=>a.localeCompare(b,'tr'));
+      inpClass.value = "";
+      save(); render();
+    }
+    function addLesson(){
+      const v = (inpLesson?.value || "").trim();
+      if(!v) return;
+      if(!lessons.includes(v)) lessons.push(v);
+      lessons.sort((a,b)=>a.localeCompare(b,'tr'));
+      inpLesson.value = "";
+      save(); render();
+    }
+
+    // init
+    load(); render();
+
+    if(btnClass){
+      btnClass.addEventListener("click", ()=>show("class"));
+      btnClass.addEventListener("touchstart", (e)=>{ e.preventDefault(); show("class"); }, {passive:false});
+    }
+    if(btnLesson){
+      btnLesson.addEventListener("click", ()=>show("lesson"));
+      btnLesson.addEventListener("touchstart", (e)=>{ e.preventDefault(); show("lesson"); }, {passive:false});
+    }
+
+    document.getElementById("btnAddClass")?.addEventListener("click", addClass);
+    document.getElementById("btnAddLesson")?.addEventListener("click", addLesson);
+
+    inpClass?.addEventListener("keydown", (e)=>{ if(e.key==="Enter"){ e.preventDefault(); addClass(); }});
+    inpLesson?.addEventListener("keydown", (e)=>{ if(e.key==="Enter"){ e.preventDefault(); addLesson(); }});
+
+    wrap?.addEventListener("click", (e)=>{
+      const btn = e.target.closest("button[data-del]");
+      if(!btn) return;
+      const kind = btn.getAttribute("data-del");
+      const i = Number(btn.getAttribute("data-i"));
+      if(kind === "class" && Number.isFinite(i)){
+        classes.splice(i,1);
+      }
+      if(kind === "lesson" && Number.isFinite(i)){
+        lessons.splice(i,1);
+      }
+      save(); render();
+    });
+  })();
+
+</script>
+<script>
+
+  
+  // ===== Saatler: Zaman Tablosu (Kaydet/Yükle) =====
+  (function(){
+    const KEY = "DTK_hours_v1";
+    const btnHours = document.getElementById("btnSettingsHours");
+    const sec = document.getElementById("hoursSection");
+
+    const inpStart = document.getElementById("inpStartTime");
+    const inpBreak = document.getElementById("inpBreakMin");
+    const inpLunch = document.getElementById("inpLunchMin");
+    const inpAfter = document.getElementById("inpAfterNo");
+    const btnSave = document.getElementById("btnSaveHours");
+
+    const DEFAULTS = { start:"08:15", breakMin:10, lunchMin:45, afterNo:6 };
+
+    function load(){
+      let v = null;
+      try{ v = JSON.parse(localStorage.getItem(KEY) || "null"); }catch(e){ v = null; }
+      if(!v || typeof v !== "object"){
+        v = DEFAULTS;
+      }
+      if(inpStart) inpStart.value = (v.start || DEFAULTS.start);
+      if(inpBreak) inpBreak.value = Number.isFinite(v.breakMin) ? v.breakMin : Number(v.breakMin || DEFAULTS.breakMin);
+      if(inpLunch) inpLunch.value = Number.isFinite(v.lunchMin) ? v.lunchMin : Number(v.lunchMin || DEFAULTS.lunchMin);
+      if(inpAfter) inpAfter.value = Number.isFinite(v.afterNo) ? v.afterNo : Number(v.afterNo || DEFAULTS.afterNo);
+    }
+    function save(){
+      const data = {
+        start: (inpStart && inpStart.value) ? inpStart.value : DEFAULTS.start,
+        breakMin: Number(inpBreak && inpBreak.value ? inpBreak.value : DEFAULTS.breakMin),
+        lunchMin: Number(inpLunch && inpLunch.value ? inpLunch.value : DEFAULTS.lunchMin),
+        afterNo: Number(inpAfter && inpAfter.value ? inpAfter.value : DEFAULTS.afterNo),
+      };
+      try{ localStorage.setItem(KEY, JSON.stringify(data)); }catch(e){}
+      if(window.showToast) window.showToast("Kaydedildi");
+    }
+
+    function show(){
+      if(!sec) return;
+      sec.style.display = "";
+      load();
+      sec.scrollIntoView({behavior:"smooth", block:"start"});
+    }
+
+    if(btnHours){
+      btnHours.addEventListener("click", show);
+      btnHours.addEventListener("touchstart", (e)=>{ e.preventDefault(); show(); }, {passive:false});
+    }
+    if(btnSave){
+      btnSave.addEventListener("click", save);
+      btnSave.addEventListener("touchstart", (e)=>{ e.preventDefault(); save(); }, {passive:false});
+    }
+
+    // varsayılanları her zaman hazır tut
+    load();
+  })();
+</script>
+
+
+<script>
+  // ===== Ayarlar: Bölüm Görünürlüğü (tek bölüm göster) =====
+  (function(){
+    const daysSec = document.getElementById("daysSection");
+    const hoursSec = document.getElementById("hoursSection");
+    const clWrap = document.getElementById("classLessonForms");
+    const classForm = document.getElementById("classForm");
+    const lessonForm = document.getElementById("lessonForm");
+
+    function hideAll(){
+      if(daysSec) daysSec.style.display = "none";
+      if(hoursSec) hoursSec.style.display = "none";
+      if(clWrap) clWrap.style.display = "none";
+      if(classForm) classForm.style.display = "none";
+      if(lessonForm) lessonForm.style.display = "none";
+    }
+
+    function show(id){
+      hideAll();
+      if(id === "btnSettingsDays" && daysSec) daysSec.style.display = "";
+      if(id === "btnSettingsHours" && hoursSec) hoursSec.style.display = "";
+      if(id === "btnSettingsClass"){
+        if(clWrap) clWrap.style.display = "";
+        if(classForm) classForm.style.display = "";
+      }
+      if(id === "btnSettingsLesson"){
+        if(clWrap) clWrap.style.display = "";
+        if(lessonForm) lessonForm.style.display = "";
+      }
+    }
+
+    // Diğer eski handler'lar çakışmasın diye yakalayıp durduruyoruz
+    function intercept(e){
+      const t = e.target;
+      const id = t && t.id;
+      if(!id) return;
+      if(["btnSettingsDays","btnSettingsHours","btnSettingsClass","btnSettingsLesson"].includes(id)){
+        e.preventDefault();
+        e.stopPropagation();
+        if(e.stopImmediatePropagation) e.stopImmediatePropagation();
+        show(id);
+      }
+    }
+
+    document.addEventListener("click", intercept, true);
+    document.addEventListener("touchstart", intercept, {capture:true, passive:false});
+
+    // ilk yüklemede kapalı
+    hideAll();
+  })();
+</script>
+
+
+<script>
+
+  
+  // ===== Günler: ders sayısı -> ders satır editörü (seçimli) =====
+  (function(){
+    const DAY_NAMES = ["Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi","Pazar"];
+    const DAY_SHORT = ["Pzt","Sal","Çar","Per","Cum","Cmt","Paz"];
+    const KEY_ACTIVE = "DTK_activeDays_v1"; // [bool x7]
+    const KEY_DAYCOUNT = "DTK_dayLessonCount_v1"; // {dayIdx: count}
+    const KEY_DAYLESSONS = "DTK_dayLessons_v1"; // {dayIdx: [{no,cls,lesson,time}]}
+    const KEY_CLASSES = "DTK_classes_v1"; // ["10/A", ...]
+    const KEY_LESSONS = "DTK_lessons_v1"; // ["Matematik", ...]
+    const KEY_HOURS = "DTK_hours_v1";     // {start, breakMin, lunchMin, afterNo}
+    const DEFAULT_LESSON_MIN = 40;
+
+    const grid = document.getElementById("activeDaysGrid");
+    const selDay = document.getElementById("selDayForCount");
+    const selCount = document.getElementById("selLessonCount");
+    const editor = document.getElementById("dayLessonEditor");
+    if(!grid || !selDay || !selCount || !editor) return;
+
+    function loadJSON(key, fallback){
+      try{
+        const raw = localStorage.getItem(key);
+        if(raw === null || raw === undefined) return fallback;
+        const v = JSON.parse(raw);
+        return (v ?? fallback);
+      }catch(e){ return fallback; }
+    }
+    function saveJSON(key, v){
+      try{ localStorage.setItem(key, JSON.stringify(v)); }catch(e){}
+    }
+    function escapeHtml(s){
+      return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+    }
+
+    // ===== Time helpers =====
+    function toMin(hhmm){
+      const m = /^(\d{1,2}):(\d{2})$/.exec(String(hhmm||"").trim());
+      if(!m) return null;
+      const h = Math.max(0, Math.min(23, Number(m[1])));
+      const mm = Math.max(0, Math.min(59, Number(m[2])));
+      return h*60 + mm;
+    }
+    function toHHMM(mins){
+      mins = ((mins % (24*60)) + (24*60)) % (24*60);
+      const h = String(Math.floor(mins/60)).padStart(2,"0");
+      const m = String(mins%60).padStart(2,"0");
+      return `${h}:${m}`;
+    }
+    function buildSlots(startHHMM, count, breakMin, lunchMin, afterNo, lessonMin){
+      const start = toMin(startHHMM);
+      if(start === null) return [];
+      const slots = [];
+      let cur = start;
+      for(let i=1;i<=count;i++){
+        const s = cur;
+        const e = cur + lessonMin;
+        slots.push({no:i, label:`${toHHMM(s)}-${toHHMM(e)}`});
+        cur = e;
+        if(i < count){
+          const gap = (Number(afterNo) === i+1) ? lunchMin : breakMin;
+          cur += Number.isFinite(gap) ? gap : 0;
+        }
+      }
+      return slots;
+    }
+    function readHoursDefaults(){
+      const h = loadJSON(KEY_HOURS, {start:"08:15", breakMin:10, lunchMin:45, afterNo:6});
+      return {
+        start: (h && h.start) ? h.start : "00:00",
+        breakMin: Number(h?.breakMin || 10),
+        lunchMin: Number(h?.lunchMin || 40),
+        afterNo: Number(h?.afterNo || 5),
+      };
+    }
+
+    function ensureOption(current, list){
+      const out = Array.isArray(list) ? list.slice() : [];
+      if(current && !out.includes(current)) out.unshift(current);
+      return out;
+    }
+
+    let active = loadJSON(KEY_ACTIVE, [true,true,true,true,true,false,false]);
+    if(!Array.isArray(active) || active.length!==7) active = [true,true,true,true,true,false,false];
+
+    let dayCount = loadJSON(KEY_DAYCOUNT, {});
+    if(typeof dayCount !== "object" || !dayCount) dayCount = {};
+
+    let dayLessons = loadJSON(KEY_DAYLESSONS, {});
+    if(typeof dayLessons !== "object" || !dayLessons) dayLessons = {};
+
+    selDay.innerHTML = DAY_NAMES.map((n,i)=>`<option value="${i}">${n}</option>`).join("");
+
+    function renderActive(){
+      grid.innerHTML = DAY_NAMES.map((_,i)=>{
+        const on = !!active[i];
+        return `<button type="button" class="dayToggle ${on?'on':''}" data-day="${i}">${DAY_SHORT[i]}</button>`;
+      }).join("");
+    }
+
+    function renderEditor(){
+      const d = Number(selDay.value||0);
+      const count = Number(selCount.value||0);
+
+      if(!Array.isArray(dayLessons[d])) dayLessons[d] = [];
+      for(let i=1;i<=count;i++){
+        if(!dayLessons[d].find(x=>Number(x.no)===i)){
+          dayLessons[d].push({no:i, cls:"", lesson:"", time:""});
+        }
+      }
+      dayLessons[d] = dayLessons[d].filter(x=>Number(x.no)<=count).sort((a,b)=>Number(a.no)-Number(b.no));
+      saveJSON(KEY_DAYLESSONS, dayLessons);
+
+      if(count === 0){
+        editor.innerHTML = `<div class="settingsHint" style="margin-top:10px">(Bu gün için ders sayısı 0)</div>`;
+        return;
+      }
+
+      const classesRaw = loadJSON(KEY_CLASSES, []);
+      const lessonsRaw = loadJSON(KEY_LESSONS, []);
+
+
+      const classesList = (Array.isArray(classesRaw) && classesRaw.length) ? classesRaw : [];
+      const lessonsList = (Array.isArray(lessonsRaw) && lessonsRaw.length) ? lessonsRaw : [];
+
+
+      const H = readHoursDefaults();
+      const slots = buildSlots(H.start, count, H.breakMin, H.lunchMin, H.afterNo, DEFAULT_LESSON_MIN);
+      const slotLabels = slots.map(s=>s.label);
+
+      editor.innerHTML = `
+        <div class="settingsHint" style="margin-top:0; opacity:1">
+          Seçilen Gün: <b>${DAY_NAMES[d]}</b> — ${count} satır
+        </div>
+        <div class="lessonEditTable">
+          <div class="lessonEditHead">
+            <div>#</div><div>Sınıf</div><div>Ders</div><div>Zaman</div>
+          </div>
+          ${dayLessons[d].map(r=>{
+            const clsList = ensureOption(r.cls||"", classesList);
+            const lesList = ensureOption(r.lesson||"", lessonsList);
+            const timeList = ensureOption(r.time||"", slotLabels);
+            return `
+              <div class="lessonEditRow" data-no="${r.no}">
+                <div class="leNo">${r.no}</div>
+                <select class="leInp leSel" data-f="cls">
+                  ${(classesList.length?`<option value="">(Seç)</option>`:`<option value="" disabled>(Önce Sınıf Ekle)</option>`)}
+                  ${clsList.map(x=>`<option value="${escapeHtml(x)}" ${x===r.cls?'selected':''}>${escapeHtml(x)}</option>`).join("")}
+                </select>
+                <select class="leInp leSel" data-f="lesson">
+                  ${(lessonsList.length?`<option value="">(Seç)</option>`:`<option value="" disabled>(Önce Ders Ekle)</option>`)}
+                  ${lesList.map(x=>`<option value="${escapeHtml(x)}" ${x===r.lesson?'selected':''}>${escapeHtml(x)}</option>`).join("")}
+                </select>
+                <select class="leInp leSel leTime" data-f="time">
+                  <option value="">(Seç)</option>
+                  ${timeList.map(x=>`<option value="${escapeHtml(x)}" ${x===r.time?'selected':''}>${escapeHtml(x)}</option>`).join("")}
+                </select>
+              </div>
+            `;
+          }).join("")}
+        </div>
+        <div class="settingsHint" style="margin-top:10px">
+          Zaman listesi, Ayarlar &gt; Saatler bölümündeki değerlerden üretilir.
+          İlk dersin zamanını seçersen diğer dersler otomatik sıralanır.
+        </div>
+      `;
+    }
+
+    function applySequentialTimesFrom(startTimeLabel, startNo){
+      const d = Number(selDay.value||0);
+      const count = Number(selCount.value||0);
+      startNo = Number(startNo||1);
+      if(!count || startNo<1 || startNo>count) return;
+
+      const H = readHoursDefaults();
+      const mm = /^(\d{1,2}:\d{2})\s*-\s*(\d{1,2}:\d{2})$/.exec(String(startTimeLabel||"").trim());
+      if(!mm) return;
+      const startHHMM = mm[1];
+
+      // startNo'dan itibaren doldur (öncekilere dokunma)
+      const remaining = count - startNo + 1;
+      const slots = buildSlots(startHHMM, remaining, H.breakMin, H.lunchMin, H.afterNo, DEFAULT_LESSON_MIN);
+      if(!slots.length) return;
+
+      if(!Array.isArray(dayLessons[d])) dayLessons[d] = [];
+      for(let i=startNo;i<=count;i++){
+        let r = dayLessons[d].find(x=>Number(x.no)===i);
+        if(!r){ r = {no:i, cls:"", lesson:"", time:""}; dayLessons[d].push(r); }
+        const slot = slots.find(s=>s.no === (i-startNo+1));
+        if(slot) r.time = slot.label;
+      }
+      dayLessons[d] = dayLessons[d].filter(x=>Number(x.no)<=count).sort((a,b)=>Number(a.no)-Number(b.no));
+      saveJSON(KEY_DAYLESSONS, dayLessons);
+      renderEditor();
+    }
+
+    selDay.value = "0";
+    selCount.value = String(Number(dayCount[0] ?? 0));
+    renderActive();
+    renderEditor();
+
+    grid.addEventListener("click", (e)=>{
+      const b = e.target.closest(".dayToggle");
+      if(!b) return;
+      const d = Number(b.getAttribute("data-day"));
+      active[d] = !active[d];
+      b.classList.toggle("on", !!active[d]);
+      saveJSON(KEY_ACTIVE, active);
+    });
+
+    selDay.addEventListener("change", ()=>{
+      const d = Number(selDay.value||0);
+      selCount.value = String(Number(dayCount[d] ?? 0));
+      renderEditor();
+    });
+
+    selCount.addEventListener("change", ()=>{
+      const d = Number(selDay.value||0);
+      const c = Number(selCount.value||0);
+      dayCount[d] = c;
+      saveJSON(KEY_DAYCOUNT, dayCount);
+      renderEditor();
+    });
+
+    editor.addEventListener("change", (e)=>{
+      const row = e.target.closest(".lessonEditRow");
+      const el = e.target;
+      if(!row || !el) return;
+      const d = Number(selDay.value||0);
+      const no = Number(row.getAttribute("data-no"));
+      const f = el.getAttribute("data-f");
+      const v = el.value;
+
+      if(!Array.isArray(dayLessons[d])) dayLessons[d] = [];
+      let r = dayLessons[d].find(x=>Number(x.no)===no);
+      if(!r){ r = {no, cls:"", lesson:"", time:""}; dayLessons[d].push(r); }
+
+      if(f === "cls") r.cls = v;
+      if(f === "lesson") r.lesson = v;
+      if(f === "time") {
+        r.time = v;
+        if(v){
+          applySequentialTimesFrom(v, no);
+          return;
+        }
+      }
+      saveJSON(KEY_DAYLESSONS, dayLessons);
+    });
+
+  })();
+</script>
+
+
+
+<script>
+  // ===== Ayarlar: Kaydet =====
+  (function(){
+    const btnSave = document.getElementById("btnSettingsSave");
+    if(!btnSave) return;
+
+    function doSave(){
+      try{
+        // Saatler kaydı (varsa)
+        const btnSaveHours = document.getElementById("btnSaveHours");
+        if(btnSaveHours){ btnSaveHours.click(); }
+      }catch(e){}
+
+      // Günler/Sınıf/Ders zaten anında localStorage'a yazıyor.
+      try{
+        window.dispatchEvent(new Event('dtk:settings-updated'));
+      }catch(e){}
+
+      try{
+        if(window.showToast) window.showToast("Kaydedildi");
+      }catch(e){}
+    }
+
+    btnSave.addEventListener("click", doSave);
+    btnSave.addEventListener("touchstart", (e)=>{ e.preventDefault(); doSave(); }, {passive:false});
+  })();
+</script>
+
+
+
+
+<div id="toast" class="toast" aria-live="polite" aria-atomic="true"></div>
+
+<script>
+  // ===== Toast helper =====
+  (function(){
+    const el = document.getElementById("toast");
+    let t = null;
+    window.showToast = function(msg="Kaydedildi"){
+      if(!el) return;
+      el.textContent = msg;
+      el.classList.add("show");
+      if(t) clearTimeout(t);
+      t = setTimeout(()=>{ el.classList.remove("show"); }, 900);
+    };
+  })();
+</script>
 
 </body>
 </html>
